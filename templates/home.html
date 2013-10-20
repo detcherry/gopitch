@@ -1,7 +1,12 @@
+<h1>getpitchd</h1>
 {% if user %}
 Coucou @{{ user.username }}<br/>
 <br/>
 <a href="/auth/signout">Sign out from Twitter</a>
 {% else %}
+<p>
+	Pitch your startup idea<br/>
+	Find your cofounder
+</p>
 <a href="/auth/signin">Sign in with Twitter</a>
 {% endif %}

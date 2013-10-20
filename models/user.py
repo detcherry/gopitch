@@ -6,6 +6,7 @@ class User(db.Model):
 	name = db.StringProperty(required = True)
 	access_token_key = db.StringProperty(required = True)
 	access_token_secret = db.StringProperty(required = True)
-	email = db.EmailProperty(required = False)
+	email = db.StringProperty(required = False)
+	type = db.StringProperty(required = False)
 	created = db.DateTimeProperty(auto_now_add = True)
 	updated = db.DateTimeProperty(auto_now = True)

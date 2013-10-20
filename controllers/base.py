@@ -21,6 +21,10 @@ class BaseHandler(webapp2.RequestHandler):
 		if values:
 			self._values = values
 		
+		if self.user.email is None and self.request.path != "/auth/complete":
+			# User has not completed his profile
+			self.redirect("/auth/complete")
+		
 		self._values.update({
 			"user": self.user,
 			"env": config.ENV,
