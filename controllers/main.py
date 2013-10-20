@@ -138,10 +138,4 @@ class SignoutHandler(BaseHandler):
 		
 		self.redirect("/")
 
-class HomeHandler(BaseHandler):
-	def get(self):		
-		values = {}
-		path = "home.html"
-		self.render(path, values)
-
 

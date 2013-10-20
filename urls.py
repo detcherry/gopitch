@@ -1,6 +1,6 @@
 import webapp2
 
-from controllers.main import HomeHandler
+from controllers.home import HomeHandler
 from controllers.main import OauthTwitterSigninHandler
 from controllers.main import OauthTwitterCallbackHandler
 from controllers.main import SignoutHandler
