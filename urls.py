@@ -1,9 +1,9 @@
 import webapp2
 
 from controllers.home import HomeHandler
-from controllers.main import OauthTwitterSigninHandler
-from controllers.main import OauthTwitterCallbackHandler
-from controllers.main import SignoutHandler
+from controllers.auth import AuthSigninHandler
+from controllers.auth import AuthCallbackHandler
+from controllers.auth import AuthSignoutHandler
 
 config = {}
 config["webapp2_extras.sessions"] = {
@@ -12,9 +12,9 @@ config["webapp2_extras.sessions"] = {
 
 app = webapp2.WSGIApplication(
 	[
-		("/oauth/twitter/signin", OauthTwitterSigninHandler),
-		("/oauth/twitter/callback", OauthTwitterCallbackHandler),
-		("/signout", SignoutHandler),
+		("/auth/signin", AuthSigninHandler),
+		("/auth/callback", AuthCallbackHandler),		
+		("/auth/signout", AuthSignoutHandler),
 		("/.*", HomeHandler),
 	],
 	config = config,
