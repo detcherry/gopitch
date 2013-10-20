@@ -1,0 +1,5 @@
+{% if user %}
+Coucou @{{ user.username }}<br/>
+{% else %}
+<a href="/oauth/twitter/signin">Sign in with Twitter</a>
+{% endif %}
