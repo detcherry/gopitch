@@ -20,7 +20,7 @@ class BaseHandler(webapp2.RequestHandler):
 		self._values = {}
 		if values:
 			self._values = values
-		
+				
 		if self.user and self.user.email is None and self.request.path != "/auth/complete":
 			# User has not completed his profile
 			self.redirect("/auth/complete")
@@ -58,12 +58,12 @@ class BaseHandler(webapp2.RequestHandler):
 	# Current user stored in session/cookie
 	@property
 	def user(self):
-		if not hasattr(self, "._user"):
+		if not hasattr(self, "_user"):
 			self._user = None;
-			twitter_id = self.session.get("id")
+			user_id = self.session.get("id")
 			
-			if twitter_id:
-				self._user = User.get_by_key_name(twitter_id)
+			if user_id:
+				self._user = User.get_by_id(user_id)
 				
 		return self._user				
 	

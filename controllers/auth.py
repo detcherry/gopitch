@@ -38,7 +38,7 @@ class AuthCallbackHandler(BaseHandler):
 			if access_token:
 				# Get user			
 				logging.info("Access token: %s" %(access_token))
-				user = User.all().filter("access_token_key", access_token.key).get()
+				user = User.all().filter("twitter_access_token_key", access_token.key).get()
 				if user:
 					# Update user info if last update > 24 hours (TODO)
 					logging.info("User already exists")				
@@ -47,21 +47,19 @@ class AuthCallbackHandler(BaseHandler):
 					logging.info("User did not exist")
 					api = API(handler, secure=False)
 					temp_user = api.verify_credentials()
-					logging.info(temp_user)
 					
-					# Get the user picture (TODO)
 					user = User(
-						key_name = str(temp_user.id),
+						twitter_id = str(temp_user.id),
+						twitter_access_token_key = str(access_token.key),
+						twitter_access_token_secret = str(access_token.secret),
 						username = str(temp_user.screen_name),
 						name = str(temp_user.name),
-						access_token_key = str(access_token.key),
-						access_token_secret = str(access_token.secret),
 					)
 					user.put()
 					logging.info("User @%s saved in datastore"%(user.username))
 		
 				# Save user in session
-				self.session["id"] = str(user.key().name())
+				self.session["id"] = user.key().id()
 				
 			else:
 				logging.error("No access token from Twitter")
