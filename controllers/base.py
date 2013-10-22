@@ -7,12 +7,28 @@ import webapp2
 import jinja2
 
 from webapp2_extras import sessions
+from functools import wraps
 
 from tweepy import auth
 from tweepy.api import API
 
 from controllers import config
 from models.user import User
+
+def login_required(method):
+	@wraps(method)
+	def wrapper(self, *args, **kwargs):
+		user = self.user
+		if not user:
+			if self.request.method == "GET":
+				# Create a better redirect (TODO) or introduce a popup for login and refresh page after login
+				self.redirect("/")
+				return
+			self.error(403)
+		else:
+			return method(self, *args, **kwargs)
+
+	return wrapper
 
 class BaseHandler(webapp2.RequestHandler):
 	# Custom rendering function
@@ -65,7 +81,7 @@ class BaseHandler(webapp2.RequestHandler):
 			if user_id:
 				self._user = User.get_by_id(user_id)
 				
-		return self._user				
+		return self._user		
 	
 	# Handle exceptions, errors that are raised
 	def handle_exception(self, exception, debug_mode):

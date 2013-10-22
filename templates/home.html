@@ -1,6 +1,8 @@
 <h1>getpitchd</h1>
 {% if user %}
-Coucou @{{ user.username }}<br/>
+Hello @{{ user.username }}<br/>
+<br/>
+<a href="/pitch/create">Create a new pitch</a><br/>
 <br/>
 <a href="/auth/signout">Sign out from Twitter</a>
 {% else %}
