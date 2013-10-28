@@ -40,13 +40,15 @@ class AuthCallbackHandler(BaseHandler):
 				logging.info("Access token: %s" %(access_token))
 				user = User.all().filter("twitter_access_token_key", access_token.key).get()
 				if user:
-					# Update user info if last update > 24 hours (TODO)
+					# TODO: Update user info if last update > 24 hours
 					logging.info("User already exists")				
 				else:
 					# Save the new user
 					logging.info("User did not exist")
 					api = API(handler, secure=False)
 					temp_user = api.verify_credentials()
+					
+					# TODO: Get the Twitter profile picture
 					
 					user = User(
 						twitter_id = str(temp_user.id),
@@ -84,6 +86,7 @@ class AuthCompleteHandler(BaseHandler):
 			path = "complete.html"
 			self.render(path, values)
 		else:
+			# TODO: don't only redirect users to homepage
 			self.redirect("/")
 	
 	def post(self):
@@ -107,7 +110,6 @@ class AuthCompleteHandler(BaseHandler):
 			self.redirect("/")
 		else:
 			# Display the form again
-			# Say what's not working (TODO)
 			values = {}
 			path = "complete.html"
 			self.render(path, values)

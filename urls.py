@@ -5,7 +5,7 @@ from controllers.auth import AuthSigninHandler
 from controllers.auth import AuthCallbackHandler
 from controllers.auth import AuthSignoutHandler
 from controllers.auth import AuthCompleteHandler
-from controllers.pitch import PitchCreateHandler
+from controllers.pitch.create import PitchCreateHandler
 
 config = {}
 config["webapp2_extras.sessions"] = {

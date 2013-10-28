@@ -1,46 +1,18 @@
 <h1>getpitchd</h1>
-	<h2>Create a new pitch!</h2>
-	<form method="post" action="/pitch/create">
-		<h3>Problem</h3>
-		<p>What is the problem you're trying to solve?</p>
-		<textarea name="problem"></textarea>
-		
-		<h3>Users</h3>
-		<p>Who has this problem? Give a detailed description</p>
-		<textarea name="users"></textarea>
-		
-		<h3>Solution</h3>
-		<p>What are you going to build?</p>
-		<textarea name="solution"></textarea>
-		
-		<h3>Opportunity</h3>
-		<p>What’s new about what you’re building? What do people are forced to do because you don’t exist</p>
-		<textarea name="opportunity"></textarea>
-		
-		<h3>Competitors</h3>
-		<p>Who are the people trying to solve the same problem as you?</p>
-		<textarea name="competitors"></textarea>
-		
-		<h3>Business Model</h3>
-		<p>How are you going to make money?</p>
-		<textarea name="business_model"></textarea>
-		
-		<h3>Market Size</h3>
-		<p>Number of users x average spend/year?</p>
-		<textarea name="market_size"></textarea>
-		
-		<h3>Acquisition</h3>
-		<p>How will potential users know about you?</p>
-		<textarea name="acquisition"></textarea>
-		
-		<h3>Milestones</h3>
-		<p>Where are you now?</p>
-		<select name="milestone">
-			<option value="idea">Just formalized the idea</option>
-			<option value="wip">Started developing the idea</option>
-			<option value="mvp">Have a working prototype</option>
-			<option value="launched">Launched a first version</option>
-		</select><br/>
-		<br/>
-		<input type="submit" value="Create">
+<!-- TODO: JS to pre-control the form -->
+<h2>So what is your big idea?</h2>
+<form method="post" action="/pitch/create">
+	<h3>Elevator Pitch</h3>
+	<p>Describe your startup idea under 50 characters!</p>
+	<input type="text" name="title"/>	
+	
+	{% for i in range(0, 7) %}
+	<h3>{{ steps[i] }}</h3>
+	<p>{{ questions[i] }}</p>
+	<textarea name="answer_{{i}}"></textarea>
+	{% endfor %}
+
+	<br/>
+	<br/>
+	<input type="submit" value="Create">
 </form>
