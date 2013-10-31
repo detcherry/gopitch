@@ -1,18 +1,22 @@
-<h1>getpitchd</h1>
+{% extends "base.html" %}
+
+{% block main %}
+
 {% if user %}
-Hello @{{ user.username }}<br/>
-<a href="/pitch/create">Create a new pitch</a><br/>
-<br/>
-Browse the existing pitches<br/>
-<ul>
-{% for pitch in pitches %}
-<li><a href="/pitch/{{ pitch.key.id }}">{{ pitch.title }}</a><br/></li>
-{% endfor %}
-</ul>
-<a href="/auth/signout">Sign out from Twitter</a>
+	Hello @{{ user.username }}<br/>
+	<a href="/idea/create">Pitch a new idea</a><br/>
+	<br/>
+	Latest ideas:<br/>
+	{% for idea in ideas %}
+		- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a><br/>
+	{% endfor %}
+	<br/>
+	<a href="/auth/signout">Sign out from Twitter</a>
 {% else %}
-<p>
-	Pitch your startup idea.<br/>
-</p>
-<a href="/auth/signin">Sign in with Twitter</a>
+	<p>
+		Pitch your startup idea.<br/>
+	</p>
+	<a href="/auth/signin">Sign in with Twitter</a>
 {% endif %}
+
+{% endblock %}	

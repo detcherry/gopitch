@@ -5,7 +5,8 @@ from controllers.auth import AuthSigninHandler
 from controllers.auth import AuthCallbackHandler
 from controllers.auth import AuthSignoutHandler
 from controllers.auth import AuthCompleteHandler
-from controllers.pitch.create import PitchCreateHandler
+from controllers.idea.create import IdeaCreateHandler
+from controllers.idea.idea import IdeaHandler
 
 config = {}
 config["webapp2_extras.sessions"] = {
@@ -18,7 +19,8 @@ app = webapp2.WSGIApplication(
 		("/auth/callback", AuthCallbackHandler),		
 		("/auth/signout", AuthSignoutHandler),
 		("/auth/complete", AuthCompleteHandler),
-		("/pitch/create", PitchCreateHandler),
+		("/idea/create", IdeaCreateHandler),
+		("/idea/([0-9]+)", IdeaHandler),
 		("/.*", HomeHandler),
 	],
 	config = config,

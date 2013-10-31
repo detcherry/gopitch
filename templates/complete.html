@@ -1,4 +1,7 @@
-<h1>getpitchd</h1>
+{% extends "base.html" %}
+
+{% block main %}
+
 <p>Please, complete your profile</p>
 <!-- TODO: JS to pre-control the form -->
 <form method="post" action="/auth/complete">
@@ -12,3 +15,5 @@
 	<br/>
 	<input type="submit" value="Submit"/>
 </form>
+
+{% endblock %}

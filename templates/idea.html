@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block main %}
+
+<h2>{{ title }}</h2>
+{% for extended_step in extended_steps %}
+<p>
+	<em>{{ extended_step.title }}</em><br/>
+	{{ extended_step.answer }}
+</p>
+{% endfor %}
+<a href="/">Back to home page</a>
+
+{% endblock %}

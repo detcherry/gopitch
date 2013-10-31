@@ -1,12 +1,14 @@
 from controllers.base import BaseHandler
 
-from models.pitch import Pitch
+from models.idea import Idea
 
 class HomeHandler(BaseHandler):
 	def get(self):
-		pitches = Pitch.all().order("-created").fetch(30)
+		ideas = Idea.all().order("-created").fetch(30)
+		# TODO: pagination for ideaes
+		
 		values = {
-			"pitches" : pitches,
+			"ideas" : ideas,
 		}
 		path = "home.html"
 		self.render(path, values)
