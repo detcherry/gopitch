@@ -6,7 +6,7 @@ Hello @{{ user.username }}<br/>
 Browse the existing pitches<br/>
 <ul>
 {% for pitch in pitches %}
-<li><a href="/p/{{ pitch.key.id }}">{{ pitch.title }}</a><br/></li>
+<li><a href="/pitch/{{ pitch.key.id }}">{{ pitch.title }}</a><br/></li>
 {% endfor %}
 </ul>
 <a href="/auth/signout">Sign out from Twitter</a>
