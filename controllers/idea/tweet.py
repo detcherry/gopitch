@@ -29,7 +29,7 @@ class IdeaTweetHandler(BaseHandler):
 			values = {
 				"response": response
 			}
-			path = "idea/tweeted.html"
+			path = "feedback.html"
 			self.render(path, values)
 				
 			

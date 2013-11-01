@@ -1,5 +1,7 @@
 import logging
 
+from error import GetpitchdError
+
 from controllers.base import BaseHandler
 from controllers.base import login_required
 
@@ -14,7 +16,6 @@ class IdeaDeleteHandler(BaseHandler):
 		path = "idea/delete.html"
 		self.render(path, values)
 	
-	
 	@login_required
 	def post(self, id):
 		idea = Idea.get_by_id(int(id))
@@ -28,11 +29,9 @@ class IdeaDeleteHandler(BaseHandler):
 				values = {
 					"response": "Idea deleted"
 				}
-				path = "idea/deleted.html"		
+				path = "feedback.html"		
 				self.render(path, values)
 			else:
-				logging.error("Not authorized to delete idea")
-				self.response.out.write("Not authorized to delete idea")
+				raise GetpitchdError("Not authorized to delete idea")
 		else:
-			logging.error("Idea does not exist")
-			self.response.out.write("Idea does not exist")
+			raise GetpitchdError("Idea does not exist")

@@ -1,5 +1,7 @@
 import logging
 
+from error import GetpitchdError
+
 from controllers.base import BaseHandler
 
 from models.idea import Idea
@@ -24,8 +26,7 @@ class IdeaHandler(BaseHandler):
 			path = "idea/idea.html"
 			self.render(path, values)
 		else:
-			logging.error("Idea does not exist")
-			self.response.out.write("Idea does not exist")
+			raise GetpitchdError("Idea does not exist")
 			
 
 		
