@@ -5,10 +5,10 @@ from controllers.base import login_required
 
 from models.idea import Idea
 
-class IdeaCreateHandler(BaseHandler):
+class IdeaPitchHandler(BaseHandler):
 
 	def __init__(self, request, response):
-		super(IdeaCreateHandler, self).__init__(request, response)
+		super(IdeaPitchHandler, self).__init__(request, response)
 		
 		self.current_version = "0"
 		self.steps = Idea.get_steps(self.current_version)
@@ -18,7 +18,7 @@ class IdeaCreateHandler(BaseHandler):
 		values = {
 			"steps": self.steps,
 		}
-		path = "create.html"
+		path = "pitch.html"
 		self.render(path, values)
 	
 	@login_required
@@ -42,7 +42,7 @@ class IdeaCreateHandler(BaseHandler):
 					break
 		
 		if incorrect:
-			self.redirect("/idea/create")
+			self.redirect("/idea/pitch")
 		else:
 			# Record the idea and redirect to homepage
 			idea = Idea(

@@ -4,9 +4,9 @@
 
 {% if user %}
 	Hello @{{ user.username }}<br/>
-	<a href="/idea/create">Pitch a new idea</a><br/>
+	<a href="/idea/pitch">Pitch a new idea</a><br/>
 	<br/>
-	Latest ideas:<br/>
+	Or read the latest ideas:<br/>
 	{% for idea in ideas %}
 		- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a><br/>
 	{% endfor %}

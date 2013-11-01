@@ -15,7 +15,7 @@ class AuthSigninHandler(BaseHandler):
 		handler = auth.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
 		
 		try:
-			authorization_url = handler.get_authorization_url()
+			authorization_url = handler.get_authorization_url(True)
 		except tweepy.TweepError: 
 			logging.error("Could not retrieve Twitter authorization URL")
 			print "Error"
@@ -23,6 +23,7 @@ class AuthSigninHandler(BaseHandler):
 		# Save the Twitter request key and secret in the session
 		self.session["request_token_key"] = handler.request_token.key
 		self.session["request_token_secret"] = handler.request_token.secret
+		self.session["referer"] = self.request.referer
 		
 		self.redirect(authorization_url)
 		
@@ -70,8 +71,9 @@ class AuthCallbackHandler(BaseHandler):
 		else:
 			logging.error("No verifier")
 			print "Error"
-			
-		self.redirect("/")
+		
+		# TODO: don't only redirect users to homepage
+		self.redirect(str(self.session.get("referer")))
 
 class AuthSignoutHandler(BaseHandler):
 	def get(self):

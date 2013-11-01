@@ -21,7 +21,6 @@ def login_required(method):
 		user = self.user
 		if not user:
 			if self.request.method == "GET":
-				# TODO: create a redirect to the page the user was initially on
 				self.redirect("/")
 				return
 			self.error(403)
