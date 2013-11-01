@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block main %}
+<p>Congratulations for pitching your idea on getpitchd!</p>
+<h2>Why not tweet your friends about it?</h2>
+<form method="post" action="/idea/tweet">
+	<textarea name="tweet">{{ tweet }}</textarea><br/>
+	<input type="submit" value="Tweet"/> or <a href="/">Skip this</a>
+</form>
+{% endblock %}

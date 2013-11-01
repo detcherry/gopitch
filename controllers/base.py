@@ -39,9 +39,10 @@ class BaseHandler(webapp2.RequestHandler):
 		if self.user and self.user.email is None and self.request.path != "/auth/complete":
 			# User has not completed his profile
 			self.redirect("/auth/complete")
-		
+			
 		self._values.update({
 			"user": self.user,
+			"admin": self.admin,
 			"env": config.ENV,
 			"version": config.VERSION,
 			"site_url": config.SITE_URL,
@@ -80,8 +81,17 @@ class BaseHandler(webapp2.RequestHandler):
 			if user_id:
 				self._user = User.get_by_id(user_id)
 				
-		return self._user		
+		return self._user
 	
+	@property
+	def admin(self):
+		if not hasattr(self, "_admin"):
+			self._admin = False
+			if self.user and self.user.twitter_id == "79523684":
+				self._admin = True
+		
+		return self._admin
+			
 	# Handle exceptions, errors that are raised
 	def handle_exception(self, exception, debug_mode):
 		logging.error(''.join(traceback.format_exception(*sys.exc_info())))

@@ -1,5 +1,6 @@
 import logging
 
+from controllers import config
 from controllers.base import BaseHandler
 from controllers.base import login_required
 
@@ -53,7 +54,21 @@ class IdeaPitchHandler(BaseHandler):
 			)
 			idea.put()
 			
-			self.redirect("/")
-		
+			short_url_length = 22 # See https://dev.twitter.com/docs/api/1.1/get/help/configuration
+			tweet = "I just pitched a new startup idea on getpitchd: "
+			
+			characters_left = 140 - len(tweet) - len(" ") - short_url_length
+			if len(idea.title) < characters_left:
+				tweet += idea.title + " "
+			else:
+				tweet += idea.title[characters_left-3] + "..." + " "
+			
+			tweet += config.SITE_URL + "/idea/" + str(idea.key().id())
+			values = {
+				"tweet": tweet
+			}
+			path = "idea/tweet.html"
+			self.render(path, values)
+			
 		
 		

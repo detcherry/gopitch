@@ -6,12 +6,13 @@
 <h2>So what is your big idea?</h2>
 <p>
 	If you are not ready yet, go back <a href="/">here</a>.<br/>
-	On the contrary, fill the form below:
+	On the contrary, fill the form below:<br/>
+	<em>NB: all fields are mandatory</em>
 </p>
 <form method="post" action="/idea/pitch">
 	<h3>Elevator Pitch</h3>
 	<p>Describe your startup idea <em>(< 51 characters)</em></p>
-	<input type="text" name="title"/>	
+	<input type="text" name="title" maxlength="50"/>	
 
 	{% for step in steps %}
 	<h3>{{ step.title }}</h3>
