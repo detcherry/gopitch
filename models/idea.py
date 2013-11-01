@@ -48,6 +48,31 @@ class Idea(db.Model):
 		return steps
 	
 	@staticmethod
+	def get_extended_idea(idea):
+		extended_steps = []
+		steps = Idea.get_steps(idea.version)
+
+		for i in range(len(steps)):
+			title = steps[i]["title"]
+			question = steps[i]["question"]
+			answer = idea.answers[i]
+
+			extended_steps.append({
+				"title": title,
+				"question": question,
+				"answer": answer,
+			})
+			
+		extended_idea = {
+			"id": idea.key().id(),
+			"title": idea.title,
+			"extended_steps": extended_steps,
+		}
+		
+		return extended_idea
+	
+	
+	@staticmethod
 	def get_extended_steps(idea):
 		extended_steps = []
 		
