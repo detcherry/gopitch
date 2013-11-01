@@ -18,7 +18,7 @@ class IdeaHandler(BaseHandler):
 			"author": author,
 			"extended_steps": extended_steps,
 		}
-		path = "idea.html"
+		path = "idea/idea.html"
 		self.render(path, values)
 		
 		

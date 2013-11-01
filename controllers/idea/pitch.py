@@ -18,7 +18,7 @@ class IdeaPitchHandler(BaseHandler):
 		values = {
 			"steps": self.steps,
 		}
-		path = "pitch.html"
+		path = "idea/pitch.html"
 		self.render(path, values)
 	
 	@login_required
