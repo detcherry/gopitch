@@ -70,27 +70,7 @@ class Idea(db.Model):
 		}
 		
 		return extended_idea
-	
-	
-	@staticmethod
-	def get_extended_steps(idea):
-		extended_steps = []
 		
-		version = idea.version
-		steps = Idea.get_steps(version)
-		
-		for i in range(len(steps)):
-			title = steps[i]["title"]
-			question = steps[i]["question"]
-			answer = idea.answers[i]
-			
-			extended_steps.append({
-				"title": title,
-				"question": question,
-				"answer": answer,
-			})
-			
-		return extended_steps
 			
 		
 		
