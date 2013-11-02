@@ -94,21 +94,10 @@ class AuthCompleteHandler(BaseHandler):
 	
 	def post(self):
 		user_email = self.request.get("email")
-		user_type = self.request.get("type")
 		
-		user_email_ok = False
-		user_type_ok = False
-		
-		if re.match("[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}", user_email):
-			user_email_ok = True
-		if user_type == "tech" or user_type == "biz" or user_type == "design":
-			user_type_ok = True
-			
-		if user_email_ok and user_type_ok:
-			# Save the user additional attributes
+		if re.match("[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}", user_email):			
 			user = self.user
 			user.email = user_email
-			user.type = user_type
 			user.put()	
 			self.redirect("/")
 		else:
