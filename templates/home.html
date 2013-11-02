@@ -7,8 +7,8 @@
 	<a href="/idea/pitch">Pitch a new idea</a><br/>
 	<br/>
 	Or read the latest ideas:<br/>
-	{% for idea in ideas %}
-		- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a><br/>
+	{% for idea, author in feed %}
+		- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a> (by @{{ author.username }})<br/>
 	{% endfor %}
 	<br/>
 	<a href="/auth/signout">Sign out from Twitter</a>
