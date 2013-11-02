@@ -12,20 +12,11 @@ class IdeaHandler(BaseHandler):
 		idea = Idea.get_by_id(int(id))
 		
 		if(idea):
-			#extended_steps = Idea.get_extended_steps(idea)
 			extended_idea = Idea.get_extended_idea(idea)
 		
 			author_key = Idea.author.get_value_for_datastore(idea)
 			author = User.get(author_key)
-			
-			"""
-			values = {
-				"id": idea.key().id(),
-				"title": idea.title,
-				"author": author,
-				"extended_steps": extended_steps,
-			}
-			"""
+
 			values = {
 				"extended_idea": extended_idea,
 				"author": author,
