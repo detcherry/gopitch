@@ -72,7 +72,7 @@ class AuthCallbackHandler(BaseHandler):
 			logging.error("No verifier")
 			print "Error"
 		
-		# TODO: don't only redirect users to homepage
+		# Redirect users to the page they came from
 		self.redirect(str(self.session.get("referer")))
 
 class AuthSignoutHandler(BaseHandler):
@@ -89,7 +89,6 @@ class AuthCompleteHandler(BaseHandler):
 			path = "complete.html"
 			self.render(path, values)
 		else:
-			# TODO: don't only redirect users to homepage
 			self.redirect("/")
 	
 	def post(self):
