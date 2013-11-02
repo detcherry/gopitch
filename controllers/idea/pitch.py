@@ -65,7 +65,7 @@ class IdeaPitchHandler(BaseHandler):
 			
 			tweet += config.SITE_URL + "/idea/" + str(idea.key().id())
 			values = {
-				"tweet": tweet
+				"tweet": tweet,
 			}
 			path = "idea/tweet.html"
 			self.render(path, values)

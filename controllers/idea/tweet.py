@@ -30,8 +30,7 @@ class IdeaTweetHandler(BaseHandler):
 				"response": response
 			}
 			path = "feedback.html"
-			self.render(path, values)
-				
+			self.render(path, values)				
 			
 		
 		
