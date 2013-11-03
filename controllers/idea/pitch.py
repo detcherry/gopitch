@@ -48,9 +48,10 @@ class IdeaPitchHandler(BaseHandler):
 			# Record the idea and redirect to homepage
 			idea = Idea(
 				title = title,
-				author = self.user.key(),
+				author = self.current_user.key(),
 				answers = answers,
 				version = self.current_version,
+				country = self.current_user.country,
 			)
 			idea.put()
 			

@@ -2,8 +2,8 @@
 
 {% block main %}
 
-{% if user %}
-	Hello @{{ user.username }}<br/>
+{% if current_user %}
+	Hello @{{ current_user.username }}<br/>
 	<a href="/idea/pitch">Pitch a new idea</a><br/>
 	<br/>
 	Or read the latest ideas:<br/>

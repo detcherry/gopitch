@@ -5,6 +5,7 @@ class Idea(db.Model):
 	author = db.ReferenceProperty(required = True)
 	answers = db.StringListProperty(required = True)
 	version = db.StringProperty(required = True)
+	country = db.StringProperty(required = True)
 	created = db.DateTimeProperty(auto_now_add = True)
 	updated = db.DateTimeProperty(auto_now = True)
 	

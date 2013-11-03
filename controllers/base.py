@@ -18,7 +18,7 @@ from models.user import User
 def login_required(method):
 	@wraps(method)
 	def wrapper(self, *args, **kwargs):
-		user = self.user
+		user = self.current_user
 		if not user:
 			if self.request.method == "GET":
 				self.redirect("/")
@@ -36,12 +36,12 @@ class BaseHandler(webapp2.RequestHandler):
 		if values:
 			self._values = values
 				
-		if self.user and self.user.email is None and self.request.path != "/auth/complete":
+		if self.current_user and self.current_user.email is None and self.request.path != "/auth/complete":
 			# User has not completed his profile
 			self.redirect("/auth/complete")
 			
 		self._values.update({
-			"user": self.user,
+			"current_user": self.current_user,
 			"admin": self.admin,
 			"env": config.ENV,
 			"version": config.VERSION,
@@ -73,21 +73,21 @@ class BaseHandler(webapp2.RequestHandler):
 	
 	# Current user stored in session/cookie
 	@property
-	def user(self):
+	def current_user(self):
 		if not hasattr(self, "_user"):
-			self._user = None;
+			self._current_user = None;
 			user_id = self.session.get("id")
 			
 			if user_id:
-				self._user = User.get_by_id(user_id)
+				self._current_user = User.get_by_id(user_id)
 				
-		return self._user
+		return self._current_user
 	
 	@property
 	def admin(self):
 		if not hasattr(self, "_admin"):
 			self._admin = False
-			if self.user and self.user.twitter_id == "79523684":
+			if self.current_user and self.current_user.twitter_id == "79523684":
 				self._admin = True
 		
 		return self._admin

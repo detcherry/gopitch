@@ -16,7 +16,7 @@ class IdeaTweetHandler(BaseHandler):
 			self.redirect("/")
 		else:
 			handler = auth.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
-			handler.set_access_token(self.user.twitter_access_token_key, self.user.twitter_access_token_secret)
+			handler.set_access_token(self.current_user.twitter_access_token_key, self.current_user.twitter_access_token_secret)
 			api = API(handler, secure=False)
 			
 			try:

@@ -23,7 +23,7 @@ class IdeaDeleteHandler(BaseHandler):
 		if(idea):
 			author_key = Idea.author.get_value_for_datastore(idea)
 
-			if(author_key == self.user.key() or self.admin):
+			if(author_key == self.current_user.key() or self.admin):
 				idea.delete()
 		
 				values = {

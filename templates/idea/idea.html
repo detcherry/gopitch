@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block main %}
-{% if user %}
+{% if current_user %}
 	<h2>{{ extended_idea.title }}</h2>
 	<h3>by <em>@{{ author.username }}</em></h3>
 	{% for extended_step in extended_idea.extended_steps %}
@@ -10,7 +10,7 @@
 		{{ extended_step.answer }}
 	</p>
 	{% endfor %}
-	{% if user.key().id() == author.key().id() or admin%}
+	{% if current_user.key().id() == author.key().id() or admin%}
 	<a href="/idea/{{ extended_idea.id }}/delete">Delete this idea</a><br/>
 	{% endif %}
 {% else %}

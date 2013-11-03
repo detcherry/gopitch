@@ -84,7 +84,7 @@ class AuthSignoutHandler(BaseHandler):
 		
 class AuthCompleteHandler(BaseHandler):
 	def get(self):
-		if self.user and self.user.email is None:
+		if self.current_user and self.current_user.email is None:
 			values = {
 				"countries": User.get_countries(),
 			}
@@ -110,7 +110,7 @@ class AuthCompleteHandler(BaseHandler):
 				break
 			
 		if user_email_ok and user_country_ok:			
-			user = self.user
+			user = self.current_user
 			user.email = user_email
 			user.country = user_country
 			user.put()	
