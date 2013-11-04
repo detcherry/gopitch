@@ -6,10 +6,15 @@
 	Hello @{{ current_user.username }}<br/>
 	<a href="/idea/pitch">Pitch a new idea</a><br/>
 	<br/>
-	Or read the latest ideas:<br/>
-	{% for idea, author in feed %}
-		- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a> (by @{{ author.username }})<br/>
-	{% endfor %}
+	{% if feed%}
+		Or read the latest ideas:<br/>
+		{% for idea, author in feed %}
+			- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a> (by @{{ author.username }})<br/>
+		{% endfor %}
+	{% else %}
+		No startup idea has been pitched here so far.<br/>
+		Pitch one <a href="/idea/pitch">here</a>.<br/>
+	{% endif %}
 	<br/>
 	<a href="/auth/signout">Sign out from Twitter</a>
 {% else %}
