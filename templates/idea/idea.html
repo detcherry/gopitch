@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block main %}
-{% if current_user %}
 	<h2>{{ extended_idea.title }}</h2>
 	<h3>by <em>@{{ author.username }}</em></h3>
 	{% for extended_step in extended_idea.extended_steps %}
@@ -10,18 +9,11 @@
 		{{ extended_step.answer }}
 	</p>
 	{% endfor %}
-	{% if current_user.key().id() == author.key().id() or admin%}
-	<a href="/idea/{{ extended_idea.id }}/delete">Delete this idea</a><br/>
+	{% if not current_user %}
+		Read more startup ideas by <a href="/auth/signin">signing in with Twitter</a><br/>
+	{% else %}
+		{% if current_user.key().id() == author.key().id() or admin %}
+		<a href="/idea/{{ extended_idea.id }}/delete">Delete this idea</a><br/>
+		{% endif %}
 	{% endif %}
-{% else %}
-	<p><em>@{{ author.username }}</em> pitched an idea:</p>
-	<h2>{{ title }}</h2>
-	<p>
-		<em>{{ extended_idea.extended_steps[6].answer }}</em><br/>
-		...<br/>
-		<br/>
-		Read the full idea via <a href="/auth/signin">signing in with Twitter</a><br/>
-	</p>
-{% endif %}
-
 {% endblock %}
