@@ -56,7 +56,7 @@ class AuthCallbackHandler(BaseHandler):
 						twitter_id = str(temp_user.id),
 						twitter_access_token_key = str(access_token.key),
 						twitter_access_token_secret = str(access_token.secret),
-						username = str(temp_user.screen_name),
+						username = str(temp_user.screen_name).lower(),
 						name = str(temp_user.name),
 					)
 					user.put()
