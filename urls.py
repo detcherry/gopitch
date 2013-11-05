@@ -9,6 +9,7 @@ from controllers.idea.pitch import IdeaPitchHandler
 from controllers.idea.idea import IdeaHandler
 from controllers.idea.tweet import IdeaTweetHandler
 from controllers.idea.delete import IdeaDeleteHandler
+from controllers.user.user import UserHandler
 
 config = {}
 config["webapp2_extras.sessions"] = {
@@ -25,6 +26,7 @@ app = webapp2.WSGIApplication(
 		("/idea/([0-9]+)", IdeaHandler),
 		("/idea/tweet", IdeaTweetHandler),
 		("/idea/([0-9]+)/delete", IdeaDeleteHandler),
+		("/(\w+)", UserHandler),
 		("/.*", HomeHandler),
 	],
 	config = config,

@@ -2,7 +2,7 @@
 
 {% block main %}
 	<h2>{{ extended_idea.title }}</h2>
-	<h3>by <em>@{{ author.username }}</em></h3>
+	<h3>by <em><a href="/{{ author.username }}">@{{ author.username }}</a></em></h3>
 	{% for extended_step in extended_idea.extended_steps %}
 	<p>
 		<em>{{ extended_step.title }}</em><br/>

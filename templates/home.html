@@ -3,13 +3,13 @@
 {% block main %}
 
 {% if current_user %}
-	Hello @{{ current_user.username }}<br/>
+	Hello <a href="{{ current_user.username }}">@{{ current_user.username }}</a><br/>
 	<a href="/idea/pitch">Pitch a new idea</a><br/>
 	<br/>
 	{% if feed%}
 		Or read the latest ideas:<br/>
 		{% for idea, author in feed %}
-			- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a> (by @{{ author.username }})<br/>
+			- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a> (by <a href="{{ author.username }}">@{{ author.username }})</a><br/>
 		{% endfor %}
 	{% else %}
 		No startup idea has been pitched here so far.<br/>
