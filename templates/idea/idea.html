@@ -24,13 +24,13 @@
 				<input type="submit" value="Delete Feedback"/>
 			</form>
 			{% else %}
-			<strong>What do you want to tell to @{{ author.username }}?</strong>
+			<strong>Hey, how do you feel about this idea?</strong>
 			<form method="post" action="/idea/{{ extended_idea.id }}/feedback">
 				<input type="radio" name="feedback" value="positive" id="positive">
-				<label for="positive">Yes, work on this idea!</label><br/>
+				<label for="positive">I'm enthusiast</label><br/>
 				<input type="radio" name="feedback" value="negative" id="negative">
-				<label for="negative">No, find something else!</label><br/>
-				<input type="submit" value="Send feedback">
+				<label for="negative">I'm skeptic</label><br/>
+				<input type="submit" value="Send Feedback">
 			</form>
 			{% endif %}
 		{% endif %}
