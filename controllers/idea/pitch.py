@@ -56,7 +56,7 @@ class IdeaPitchHandler(BaseHandler):
 			idea.put()
 			
 			short_url_length = 22 # See https://dev.twitter.com/docs/api/1.1/get/help/configuration
-			tweet = "I just pitched a new startup idea on getpitchd: "
+			tweet = "I just pitched a new startup idea on @getpitchd: "
 			
 			characters_left = 140 - len(tweet) - len(" ") - short_url_length
 			if len(idea.title) < characters_left:
