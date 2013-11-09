@@ -1,11 +1,15 @@
 from google.appengine.ext import db
 
+from models.user import User
+
 class Idea(db.Model):
 	title = db.StringProperty(required = True)
-	author = db.ReferenceProperty(required = True)
+	author = db.ReferenceProperty(User, required = True, collection_name="ideaAuthor")
 	answers = db.StringListProperty(required = True)
 	version = db.StringProperty(required = True)
 	country = db.StringProperty(required = True)
+	positive = db.IntegerProperty(default=0)
+	negative = db.IntegerProperty(default=0)
 	created = db.DateTimeProperty(auto_now_add = True)
 	updated = db.DateTimeProperty(auto_now = True)
 	

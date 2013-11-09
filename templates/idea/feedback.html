@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block main %}
+Thanks <strong>@{{ current_user.username }}</strong> for sending a quick feedback to <strong>@{{ author.username }}</strong>!<br/>
+<br/>
+Now, tweet him more details!
+<form method="post" action="/user/tweet">
+	<textarea name="tweet" maxlength="140">@{{ author.username }} {% if feedback.content == "positive" %}You should work on{% else %}Find something else than your{% endif %} {{ extended_idea.title }} because...</textarea><br/>
+	<input type="submit" value="Tweet"> or <a href="/">Go back to homepage</a>
+</form>
+<br/>
+{% endblock %}

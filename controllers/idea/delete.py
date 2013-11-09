@@ -27,7 +27,7 @@ class IdeaDeleteHandler(BaseHandler):
 				idea.delete()
 		
 				values = {
-					"response": "Idea deleted"
+					"response": "Idea deleted."
 				}
 				path = "feedback.html"		
 				self.render(path, values)

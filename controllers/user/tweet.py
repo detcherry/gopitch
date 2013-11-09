@@ -7,7 +7,7 @@ from controllers import config
 from controllers.base import BaseHandler
 from controllers.base import login_required
 
-class IdeaTweetHandler(BaseHandler):
+class UserTweetHandler(BaseHandler):
 	@login_required
 	def post(self):
 		tweet = self.request.get("tweet")
@@ -21,7 +21,7 @@ class IdeaTweetHandler(BaseHandler):
 			
 			try:
 				api.update_status(tweet)
-				response = "Idea successfully tweeted."
+				response = "Tweet successfully sent."
 			except tweepy.TweepError:
 				logging.error("Could not send tweet.")
 				response = "Could not send your tweet. Please try again later."

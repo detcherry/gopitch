@@ -16,7 +16,6 @@ class User(db.Model):
 	
 	@staticmethod
 	def get_countries():
-		
 		countries = [
 			{"name":"AFGHANISTAN".decode("utf-8"),"code":"AF"},
 			{"name":"ÅLAND ISLANDS".decode("utf-8"),"code":"AX"},
@@ -267,8 +266,6 @@ class User(db.Model):
 			{"name":"YEMEN".decode("utf-8"),"code":"YE"},
 			{"name":"ZAMBIA".decode("utf-8"),"code":"ZM"},
 			{"name":"ZIMBABWE".decode("utf-8"),"code":"ZW"},
-			
-		
 		]
 		
 		return countries

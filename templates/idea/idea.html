@@ -14,6 +14,25 @@
 	{% else %}
 		{% if current_user.key().id() == author.key().id() or admin %}
 		<a href="/idea/{{ extended_idea.id }}/delete">Delete this idea</a><br/>
+		<br/>
+		{% endif %}
+		{% if current_user.key().id() != author.key().id() %}
+			{% if feedback %}
+			<strong>Feedback sent to @{{ author.username}}:</strong><br/>
+			{% if feedback.content == "positive" %}You should work on this idea{% else %}You should find something else{% endif %}!<br/>
+			<form method="post" action="/feedback/{{ feedback.key().name() }}/delete">
+				<input type="submit" value="Delete Feedback"/>
+			</form>
+			{% else %}
+			<strong>What do you want to tell to @{{ author.username }}?</strong>
+			<form method="post" action="/idea/{{ extended_idea.id }}/feedback">
+				<input type="radio" name="feedback" value="positive" id="positive">
+				<label for="positive">Yes, work on this idea!</label><br/>
+				<input type="radio" name="feedback" value="negative" id="negative">
+				<label for="negative">No, find something else!</label><br/>
+				<input type="submit" value="Send feedback">
+			</form>
+			{% endif %}
 		{% endif %}
 	{% endif %}
 {% endblock %}
