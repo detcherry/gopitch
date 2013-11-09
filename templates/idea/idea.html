@@ -18,8 +18,7 @@
 		{% endif %}
 		{% if current_user.key().id() != author.key().id() %}
 			{% if feedback %}
-			<strong>Feedback sent to @{{ author.username}}:</strong><br/>
-			{% if feedback.content == "positive" %}You should work on this idea{% else %}You should find something else{% endif %}!<br/>
+			Feedback sent to @{{ author.username}}:<strong> {% if feedback.content == "positive" %}I'm enthusiast{% else %}I'm skeptic{% endif %}!</strong>
 			<form method="post" action="/feedback/{{ feedback.key().name() }}/delete">
 				<input type="submit" value="Delete Feedback"/>
 			</form>

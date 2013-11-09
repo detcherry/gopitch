@@ -26,6 +26,12 @@ class IdeaFeedbackHandler(BaseHandler):
 				)
 				feedback.put()
 				
+				if(content == "positive"):
+					idea.positive += 1
+				else:
+					idea.negative += 1
+				idea.put()
+				
 				extended_idea = Idea.get_extended_idea(idea)
 				
 				author_key = Idea.author.get_value_for_datastore(idea)

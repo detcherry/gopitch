@@ -71,6 +71,8 @@ class Idea(db.Model):
 		extended_idea = {
 			"id": idea.key().id(),
 			"title": idea.title,
+			"positive": idea.positive,
+			"negative": idea.negative,
 			"extended_steps": extended_steps,
 		}
 		
