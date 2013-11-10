@@ -1,6 +1,7 @@
 from google.appengine.ext import db
 
 from models.user import User
+from models.counter import Shard
 
 class Idea(db.Model):
 	title = db.StringProperty(required = True)
@@ -8,11 +9,9 @@ class Idea(db.Model):
 	answers = db.StringListProperty(required = True)
 	version = db.StringProperty(required = True)
 	country = db.StringProperty(required = True)
-	positive = db.IntegerProperty(default=0)
-	negative = db.IntegerProperty(default=0)
 	created = db.DateTimeProperty(auto_now_add = True)
 	updated = db.DateTimeProperty(auto_now = True)
-	
+		
 	@staticmethod
 	def get_steps(version):
 		steps = []
@@ -71,12 +70,42 @@ class Idea(db.Model):
 		extended_idea = {
 			"id": idea.key().id(),
 			"title": idea.title,
-			"positive": idea.positive,
-			"negative": idea.negative,
 			"extended_steps": extended_steps,
 		}
 		
 		return extended_idea
+	
+	@property
+	def _positive_counter_name(self):
+		return "positive.idea." + str(self.key().id())
+	
+	@property
+	def positive_count(self):
+		count = Shard().get_count(self._positive_counter_name)
+		return count
+	
+	def increment_positive_count(self):
+		Shard().increment(self._positive_counter_name)
+	
+	def decrement_positive_count(self):
+		Shard().decrement(self._positive_counter_name)
+	
+	@property
+	def _negative_counter_name(self):
+		return "negative.idea." + str(self.key().id())
+	
+	@property		
+	def negative_count(self):
+		count = Shard().get_count(self._negative_counter_name)
+
+	def increment_negative_count(self):
+		Shard().increment(self._negative_counter_name)
+
+	def decrement_negative_count(self):
+		Shard().decrement(self._negative_counter_name)
+		
+		
+		
 		
 			
 		

@@ -26,11 +26,12 @@ class IdeaFeedbackHandler(BaseHandler):
 				)
 				feedback.put()
 				
+				logging.info(content)
+				
 				if(content == "positive"):
-					idea.positive += 1
+					idea.increment_positive_count()
 				else:
-					idea.negative += 1
-				idea.put()
+					idea.increment_negative_count()
 				
 				extended_idea = Idea.get_extended_idea(idea)
 				
