@@ -117,7 +117,9 @@ class AuthCompleteHandler(BaseHandler):
 			self.redirect("/")
 		else:
 			# Display the form again
-			values = {}
+			values = {
+				"countries": User.get_countries(),
+			}
 			path = "complete.html"
 			self.render(path, values)
 		
