@@ -1,3 +1,10 @@
+import logging
+
+from math import log
+from datetime import datetime
+from datetime import timedelta
+from calendar import timegm
+
 from google.appengine.ext import db
 
 from models.user import User
@@ -97,13 +104,16 @@ class Idea(db.Model):
 	@property		
 	def negative_count(self):
 		count = Shard().get_count(self._negative_counter_name)
+		return count
 
 	def increment_negative_count(self):
 		Shard().increment(self._negative_counter_name)
 
 	def decrement_negative_count(self):
 		Shard().decrement(self._negative_counter_name)
-		
+	
+
+				
 		
 		
 		
