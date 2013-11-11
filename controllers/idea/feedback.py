@@ -25,9 +25,7 @@ class IdeaFeedbackHandler(BaseHandler):
 					content = content,
 				)
 				feedback.put()
-				
-				logging.info(content)
-				
+								
 				if(content == "positive"):
 					idea.increment_positive_count()
 				else:
