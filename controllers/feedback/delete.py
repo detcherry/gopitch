@@ -22,9 +22,10 @@ class FeedbackDeleteHandler(BaseHandler):
 				idea = Idea.get(idea_key)
 				
 				if(feedback.content == "positive"):
-					idea.decrement_positive_count()
+					idea.positive -= 1
 				else:
-					idea.decrement_negative_count()
+					idea.negative -= 1
+				idea.put()
 				
 				feedback.delete()
 						

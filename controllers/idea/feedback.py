@@ -27,9 +27,10 @@ class IdeaFeedbackHandler(BaseHandler):
 				feedback.put()
 								
 				if(content == "positive"):
-					idea.increment_positive_count()
+					idea.positive += 1
 				else:
-					idea.increment_negative_count()
+					idea.negative += 1
+				idea.put()
 				
 				extended_idea = Idea.get_extended_idea(idea)
 				
@@ -44,6 +45,6 @@ class IdeaFeedbackHandler(BaseHandler):
 				path = "idea/feedback.html"
 				self.render(path, values)
 			else:
-				raise GetpitchdError("Forbidden content")
+				raise GetpitchdError("Forbidden feedback")
 		else:
 			raise GetpitchdError("Idea does not exist")

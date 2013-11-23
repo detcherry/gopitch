@@ -18,15 +18,15 @@
 		{% endif %}
 		{% if current_user.key().id() != author.key().id() %}
 			{% if feedback %}
-			Feedback sent to @{{ author.username}}:<strong> {% if feedback.content == "positive" %}I'm enthusiastic{% else %}I'm skeptic{% endif %}!</strong>
+			Feedback sent to @{{ author.username}}:<strong> {% if feedback.content == "positive" %}I'm enthusiast{% else %}I'm skeptic{% endif %}!</strong>
 			<form method="post" action="/feedback/{{ feedback.key().name() }}/delete">
 				<input type="submit" value="Delete Feedback"/>
 			</form>
 			{% else %}
-			<strong>Hey, what do you feel about this idea?</strong>
+			<strong>Hey, how do you feel about this idea?</strong>
 			<form method="post" action="/idea/{{ extended_idea.id }}/feedback">
 				<input type="radio" name="feedback" value="positive" id="positive">
-				<label for="positive">I'm enthusiastic</label><br/>
+				<label for="positive">I'm enthusiast</label><br/>
 				<input type="radio" name="feedback" value="negative" id="negative">
 				<label for="negative">I'm skeptic</label><br/>
 				<input type="submit" value="Send Feedback">
