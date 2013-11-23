@@ -5,23 +5,31 @@
 {% if current_user %}
 	Hello <a href="{{ current_user.username }}">@{{ current_user.username }}</a><br/>
 	<a href="/idea/pitch">Pitch a new idea</a><br/>
-	<br/>
 	{% if feed%}
-		Or read the latest ideas:<br/>
+		<h3>Latest ideas:</h3>
 		{% for idea, author in feed %}
-			- <a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a> (by <a href="{{ author.username }}">@{{ author.username }})</a><br/>
+		<p>
+			<strong><a href="/idea/{{ idea.key().id() }}">{{ idea.title }}</a></strong><br/>
+			Pitched by: <a href="{{ author.username }}">@{{ author.username }}</a> // Enthusiasts: 0 // Skeptics: 0<br/>
+		</p>
 		{% endfor %}
 	{% else %}
+	<p>
 		No startup idea has been pitched here so far.<br/>
 		Pitch one <a href="/idea/pitch">here</a>.<br/>
+	</p>
 	{% endif %}
-	<br/>
-	<a href="/auth/signout">Sign out from Twitter</a>
+	<p>
+		<br/>
+		<a href="/auth/signout">Sign out from Twitter</a>
+	</p>
 {% else %}
 	<p>
-		Pitch or get pitched a new startup idea.<br/>
+		Pitch or get pitched a new startup idea.
 	</p>
-	<a href="/auth/signin">Sign in with Twitter</a>
+	<p>
+		<a href="/auth/signin">Sign in with Twitter</a>
+	</p>
 {% endif %}
 
 {% endblock %}	
