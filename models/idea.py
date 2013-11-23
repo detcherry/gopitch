@@ -3,7 +3,6 @@ import logging
 from google.appengine.ext import db
 
 from models.user import User
-from models.counter import Shard
 
 class Idea(db.Model):
 	title = db.StringProperty(required=True)
