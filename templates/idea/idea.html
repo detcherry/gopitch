@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block main %}
-	<h2>{{ extended_idea.title }}</h2>
-	<h3>by <em><a href="/{{ author.username }}">@{{ author.username }}</a></em></h3>
+	<h2>{{ extended_idea.title }} </h2>
+	<p>
+		<strong>Posted by:</strong> <em><a href="/{{ author.username }}">@{{ author.username }}</a></em> // <strong>Enthusiasts:</strong> {{ extended_idea.positive }} // <strong>Skeptics:</strong> {{ extended_idea.negative }} 
+	</p>
 	{% for extended_step in extended_idea.extended_steps %}
 	<p>
 		<em>{{ extended_step.title }}</em><br/>
