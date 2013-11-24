@@ -3,7 +3,7 @@
 {% block main %}
 	<h2>{{ extended_idea.title }} </h2>
 	<p>
-		<strong>Pitched by:</strong> <em><a href="/{{ author.username }}">@{{ author.username }}</a></em> // <strong>Enthusiasts:</strong> {{ extended_idea.positive }} // <strong>Skeptics:</strong> {{ extended_idea.negative }} 
+		<strong>Pitched by:</strong> <em><a href="/{{ author.username }}">@{{ author.username }}</a></em> | <strong>Enthusiasts:</strong> {{ extended_idea.positive }} | <strong>Skeptics:</strong> {{ extended_idea.negative }} 
 	</p>
 	{% for extended_step in extended_idea.extended_steps %}
 	<p>
@@ -12,11 +12,13 @@
 	</p>
 	{% endfor %}
 	{% if not current_user %}
-		Read more startup ideas by <a href="/auth/signin">signing in with Twitter</a><br/>
+		<p>Read more startup ideas by <a href="/auth/signin">signing in with Twitter</a><br/></p>
 	{% else %}
 		{% if current_user.key().id() == author.key().id() or admin %}
-		<a href="/idea/{{ extended_idea.id }}/delete">Delete this idea</a><br/>
-		<br/>
+		<p>
+			<a href="/idea/{{ extended_idea.id }}/delete">Delete this idea</a><br/>
+			<br/>
+		</p>
 		{% endif %}
 		{% if current_user.key().id() != author.key().id() %}
 			{% if feedback %}
@@ -34,6 +36,11 @@
 				<input type="submit" value="Send Feedback">
 			</form>
 			{% endif %}
+			<form method="post" action="/idea/{{ extended_idea.id }}/comment">
+				<textarea rows="6" cols="60" name="text" maxlength="140"></textarea><br/>
+				<label><input type="checkbox" name="twitter" checked> Tweet comment</label><br/>
+				<input type="submit" value="Comment">
+			</form>
 		{% endif %}
 	{% endif %}
 {% endblock %}

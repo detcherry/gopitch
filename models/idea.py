@@ -11,6 +11,7 @@ class Idea(db.Model):
 	version = db.StringProperty(required=True)
 	positive = db.IntegerProperty(required=True, default=0)
 	negative = db.IntegerProperty(required=True, default=0)
+	comments = db.IntegerProperty(required=True, default=0)
 	score = db.FloatProperty(required=True, default=0.0)
 	country = db.StringProperty(required=True)
 	created = db.DateTimeProperty(auto_now_add=True)
@@ -76,6 +77,7 @@ class Idea(db.Model):
 			"title": idea.title,
 			"positive": idea.positive,
 			"negative": idea.negative,
+			"comments": idea.comments,
 			"extended_steps": extended_steps,
 		}
 		
