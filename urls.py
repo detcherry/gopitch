@@ -10,6 +10,8 @@ from controllers.idea.idea import IdeaHandler
 from controllers.idea.delete import IdeaDeleteHandler
 from controllers.idea.feedback import IdeaFeedbackHandler
 from controllers.idea.comment import IdeaCommentHandler
+from controllers.comment.reply import CommentReplyHandler
+from controllers.comment.delete import CommentDeleteHandler
 from controllers.feedback.delete import FeedbackDeleteHandler
 from controllers.user.user import UserHandler
 from controllers.user.tweet import UserTweetHandler
@@ -30,6 +32,8 @@ app = webapp2.WSGIApplication(
 		("/idea/([0-9]+)/delete", IdeaDeleteHandler),
 		("/idea/([0-9]+)/feedback", IdeaFeedbackHandler),
 		("/idea/([0-9]+)/comment", IdeaCommentHandler),
+		("/comment/([0-9]+)/reply", CommentReplyHandler),
+		("/comment/([0-9]+)/delete", CommentDeleteHandler),
 		("/feedback/([0-9_]+)/delete", FeedbackDeleteHandler),
 		("/user/tweet", UserTweetHandler),
 		("/(\w+)", UserHandler),

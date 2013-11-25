@@ -30,17 +30,33 @@
 			<strong>Hey, how do you feel about this idea?</strong>
 			<form method="post" action="/idea/{{ extended_idea.id }}/feedback">
 				<input type="radio" name="feedback" value="positive" id="positive">
-				<label for="positive">I'm enthusiast</label><br/>
+				<label for="positive">I'm enthusiastic</label><br/>
 				<input type="radio" name="feedback" value="negative" id="negative">
 				<label for="negative">I'm skeptic</label><br/>
 				<input type="submit" value="Send Feedback">
 			</form>
 			{% endif %}
-			<form method="post" action="/idea/{{ extended_idea.id }}/comment">
-				<textarea rows="6" cols="60" name="text" maxlength="140"></textarea><br/>
-				<label><input type="checkbox" name="twitter" checked> Tweet comment</label><br/>
-				<input type="submit" value="Comment">
-			</form>
 		{% endif %}
+		<form method="post" action="/idea/{{ extended_idea.id }}/comment">
+			<textarea rows="6" cols="60" name="text" maxlength="140"></textarea><br/>
+			<!--<label><input type="checkbox" name="twitter" checked> Tweet comment</label><br/>-->
+			<input type="submit" value="Comment">
+		</form>
 	{% endif %}
+	<p>
+		<strong>Comments:</strong><br/>
+		{% if comments %}
+			{% for a, c, d in comments %}
+			<p style="padding-left: {{ d }}em">
+				<a href="/{{ a.username }}">@{{ a.username }}</a><br/>
+				{{ c.text }}<br/>
+				{% if current_user %}
+				<a href="/comment/{{ c.key().id() }}/reply">reply</a>{% if current_user.key().id() == a.key().id() %} | <a href="/comment/{{ c.key().id() }}/delete">delete</a>{% endif %}
+				{% endif %}
+			</p>
+			{% endfor %}
+		{% else %}
+		No comment so far
+		{% endif %}
+	</p>
 {% endblock %}
