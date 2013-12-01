@@ -19,37 +19,43 @@ class IdeaFeedbackHandler(BaseHandler):
 			content = self.request.get("feedback")
 			
 			if(content=="positive" or content=="negative"):
-				feedback = Feedback(
-					key_name = str(self.current_user.key().id()) + "_" + str(idea.key().id()),
-					author = self.current_user.key(),
-					idea = idea.key(),
-					content = content,
-				)
-				feedback.put()
-								
-				if(content == "positive"):
-					idea.positive += 1
-				else:
-					idea.negative += 1
+				key_name = str(self.current_user.key().id()) + "_" + str(idea.key().id())
+				existing_feedback = Feedback.get_by_key_name(key_name)
 				
-				text = self.request.get("text")
-				if(text is not ""):
-					comment = Comment(
-						idea = idea.key(),
+				if not existing_feedback:	
+					feedback = Feedback(
+						key_name = key_name,
 						author = self.current_user.key(),
-						text = text,
+						idea = idea.key(),
+						content = content,
 					)
-
-					comment.put()
-					idea.comments += 1
-				
-				idea.put()
+					feedback.put()
 								
-				values = {
-					"response": "Thanks for giving your feedback!"
-				}
-				path = "feedback.html"
-				self.render(path, values)
+					if(content == "positive"):
+						idea.positive += 1
+					else:
+						idea.negative += 1
+				
+					text = self.request.get("text")
+					if text:
+						comment = Comment(
+							idea = idea.key(),
+							author = self.current_user.key(),
+							text = text,
+						)
+
+						comment.put()
+						idea.comments += 1
+				
+					idea.put()
+								
+					values = {
+						"response": "Thanks for giving your feedback!"
+					}
+					path = "feedback.html"
+					self.render(path, values)
+				else:
+					raise GetpitchdError("Feedback already sent")
 			else:
 				raise GetpitchdError("Forbidden feedback")
 		else:

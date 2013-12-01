@@ -25,6 +25,10 @@ class IdeaDeleteHandler(BaseHandler):
 
 			if(author_key == self.current_user.key() or self.admin):
 				idea.delete()
+				
+				user = self.current_user
+				user.ideas -= 1
+				user.put()
 		
 				values = {
 					"response": "Idea deleted."

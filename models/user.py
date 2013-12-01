@@ -11,6 +11,7 @@ class User(db.Model):
 	name = db.StringProperty(required=True)
 	img = db.StringProperty(required=False)
 	bio = db.StringProperty(required=False, default="")
+	ideas = db.IntegerProperty(required=True, default=0)
 	email = db.StringProperty(required=False)
 	country = db.StringProperty(required=False)
 	created = db.DateTimeProperty(auto_now_add=True)

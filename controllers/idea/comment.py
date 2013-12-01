@@ -16,7 +16,7 @@ class IdeaCommentHandler(BaseHandler):
 		if(idea):
 			text = self.request.get("text")
 			
-			if(text is not ""):
+			if text:
 				comment = Comment(
 					idea = idea.key(),
 					author = self.current_user.key(),

@@ -55,6 +55,10 @@ class IdeaPitchHandler(BaseHandler):
 			)
 			idea.put()
 			
+			user = self.current_user
+			user.ideas += 1
+			user.put()
+			
 			short_url_length = 22 # See https://dev.twitter.com/docs/api/1.1/get/help/configuration
 			tweet = "I just pitched a new startup idea on @getpitchd: "
 			

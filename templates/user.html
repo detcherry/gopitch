@@ -2,6 +2,7 @@
 
 {% block main %}
 <h2><a href="/{{ user.username }}">@{{ user.username }}</a></h2>
+<strong>Ideas:</strong> {{ user.ideas }} | <strong>Pitching since:</strong> {{ user.created|timesince }} ago
 {% if ideas %}
 	{% for idea in ideas %}
 	<p>
