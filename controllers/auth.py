@@ -1,6 +1,8 @@
 import logging
 import re
 import tweepy
+from datetime import datetime
+from datetime import timedelta
 
 from tweepy import auth
 from tweepy.api import API
@@ -41,27 +43,36 @@ class AuthCallbackHandler(BaseHandler):
 				# Get user			
 				logging.info("Access token: %s" %(access_token))
 				user = User.all().filter("twitter_access_token_key", access_token.key).get()
-				if user:
-					# TODO: Update user info if last update > 24 hours
-					logging.info("User already exists")				
-				else:
-					# Save the new user
-					logging.info("User did not exist")
+				
+				if((not user) or (user and user.updated < datetime.now() - timedelta(0,86400))):
+					logging.info("Connecting to the Twitter API")
 					api = API(handler, secure=False)
 					temp_user = api.verify_credentials()
 					
-					# TODO: Get the Twitter profile picture
+					if not user:
+						logging.info("User did not exist")
+						user = User(
+							twitter_id = str(temp_user.id),
+							twitter_access_token_key = str(access_token.key),
+							twitter_access_token_secret = str(access_token.secret),
+							username = str(temp_user.screen_name).lower(),
+							name = str(temp_user.name),
+							img = str(temp_user.profile_image_url),
+							bio = str(temp_user.description),
+						)
+					else:
+						logging.info("User had to be updated")
+						user.twitter_id = str(temp_user.id)
+						user.twitter_access_token_key = str(access_token.key)
+						user.twitter_access_token_secret = str(access_token.secret)
+						user.username = str(temp_user.screen_name).lower()
+						user.name = str(temp_user.name)
+						user.img = str(temp_user.profile_image_url)
+						user.bio = str(temp_user.description)
 					
-					user = User(
-						twitter_id = str(temp_user.id),
-						twitter_access_token_key = str(access_token.key),
-						twitter_access_token_secret = str(access_token.secret),
-						username = str(temp_user.screen_name).lower(),
-						name = str(temp_user.name),
-					)
 					user.put()
 					logging.info("User @%s saved in datastore"%(user.username))
-		
+				
 				# Save user in session
 				self.session["id"] = user.key().id()
 				

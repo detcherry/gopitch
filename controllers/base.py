@@ -1,11 +1,10 @@
-import os.path
+import os
 import logging
 import traceback
 import sys
 import json
 import webapp2
 
-os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from django.template.loader import render_to_string
 
 from webapp2_extras import sessions
@@ -34,6 +33,8 @@ def login_required(method):
 class BaseHandler(webapp2.RequestHandler):
 	# Custom rendering function
 	def render(self, path, values):
+		os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+		
 		self._values = {}
 		if values:
 			self._values = values
