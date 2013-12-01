@@ -4,7 +4,10 @@
 <h2><a href="/{{ user.username }}">@{{ user.username }}</a></h2>
 {% if ideas %}
 	{% for idea in ideas %}
-	- <a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a><br/>
+	<p>
+		<a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a> (by <a href="{{ author.username }}">@{{ user.username }})</a><br/>
+		<small>{{ idea.created|timesince }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}</small><br/>
+	</p>
 	{% endfor %}
 {% else %}
 	No idea pitched so far.
