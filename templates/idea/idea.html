@@ -14,16 +14,16 @@
 	{% if not current_user %}
 		<p>Read more startup ideas by <a href="/auth/signin">signing in with Twitter</a><br/></p>
 	{% else %}
-		{% if current_user.key().id() == author.key().id() or admin %}
+		{% if current_user.key.id == author.key.id or admin %}
 		<p>
 			<a href="/idea/{{ extended_idea.id }}/delete">Delete this idea</a><br/>
 			<br/>
 		</p>
 		{% endif %}
-		{% if current_user.key().id() != author.key().id() %}
+		{% if current_user.key.id != author.key.id %}
 			{% if feedback %}
 			Feedback sent to @{{ author.username}}:<strong> {% if feedback.content == "positive" %}I'm enthusiast{% else %}I'm skeptic{% endif %}!</strong>
-			<form method="post" action="/feedback/{{ feedback.key().name() }}/delete">
+			<form method="post" action="/feedback/{{ feedback.key.name }}/delete">
 				<input type="submit" value="Delete Feedback"/>
 			</form>
 			{% else %}
@@ -51,7 +51,7 @@
 				<a href="/{{ a.username }}">@{{ a.username }}</a><br/>
 				{{ c.text }}<br/>
 				{% if current_user %}
-				<a href="/comment/{{ c.key().id() }}/reply">reply</a>{% if current_user.key().id() == a.key().id() %} | <a href="/comment/{{ c.key().id() }}/delete">delete</a>{% endif %}
+				<a href="/comment/{{ c.key.id }}/reply">reply</a>{% if current_user.key.id == a.key.id %} | <a href="/comment/{{ c.key.id }}/delete">delete</a>{% endif %}
 				{% endif %}
 			</p>
 			{% endfor %}

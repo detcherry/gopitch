@@ -4,7 +4,9 @@ import traceback
 import sys
 import json
 import webapp2
-import jinja2
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
+from django.template.loader import render_to_string
 
 from webapp2_extras import sessions
 from functools import wraps
@@ -49,11 +51,7 @@ class BaseHandler(webapp2.RequestHandler):
 			"domain": config.DOMAIN,
 			"google_analytics_id": config.GOOGLE_ANALYTICS_ID,
 		})
-		
-		templates = os.path.join(os.path.dirname(__file__),"../templates/")
-		jinja = jinja2.Environment(loader=jinja2.FileSystemLoader(templates))
-		template = jinja.get_template(path)
-		self.response.out.write(template.render(self._values))
+		self.response.out.write(render_to_string(path, self._values))
 	
 	def dispatch(self):
 		# Get a session store for this request.

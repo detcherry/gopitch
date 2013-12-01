@@ -4,7 +4,7 @@
 <a href="/{{ author.username }}">@{{ author.username }}</a><br/>
 {{ comment.text }}<br/>
 <br/>
-<form method="post" action="/comment/{{ comment.key().id() }}/reply">
+<form method="post" action="/comment/{{ comment.key.id }}/reply">
 	<textarea rows="6" cols="60" maxlength="140" name="text"></textarea><br/>
 	<input type="submit" value="Reply">
 </form>
