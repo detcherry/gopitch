@@ -8,6 +8,7 @@ from controllers.base import login_required
 from models.idea import Idea
 from models.user import User
 from models.feedback import Feedback
+from models.comment import Comment
 
 class IdeaFeedbackHandler(BaseHandler):
 	@login_required
@@ -30,19 +31,24 @@ class IdeaFeedbackHandler(BaseHandler):
 					idea.positive += 1
 				else:
 					idea.negative += 1
+				
+				text = self.request.get("text")
+				if(text is not ""):
+					comment = Comment(
+						idea = idea.key(),
+						author = self.current_user.key(),
+						text = text,
+					)
+
+					comment.put()
+					idea.comments += 1
+				
 				idea.put()
-				
-				extended_idea = Idea.get_extended_idea(idea)
-				
-				author_key = Idea.author.get_value_for_datastore(idea)
-				author = User.get(author_key)
-				
+								
 				values = {
-					"feedback": feedback,
-					"extended_idea": extended_idea,
-					"author": author,
+					"response": "Thanks for giving your feedback!"
 				}
-				path = "idea/feedback.html"
+				path = "feedback.html"
 				self.render(path, values)
 			else:
 				raise GetpitchdError("Forbidden feedback")
