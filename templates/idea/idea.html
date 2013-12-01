@@ -39,7 +39,6 @@
 		{% if current_user.key.id == author.key.id or feedback %}
 		<form method="post" action="/idea/{{ extended_idea.id }}/comment">
 			<textarea rows="6" cols="60" name="text"></textarea><br/>
-			<!--<label><input type="checkbox" name="twitter" checked> Tweet comment</label><br/>-->
 			<input type="submit" value="Comment">
 		</form>
 		{% endif %}
