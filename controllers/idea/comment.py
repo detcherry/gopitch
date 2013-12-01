@@ -20,7 +20,7 @@ class IdeaCommentHandler(BaseHandler):
 				comment = Comment(
 					idea = idea.key(),
 					author = self.current_user.key(),
-					text = text[:139],
+					text = text,
 				)
 				
 				comment.put()
