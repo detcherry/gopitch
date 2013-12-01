@@ -9,8 +9,8 @@
 		<h3>Latest ideas:</h3>
 		{% for idea, author in feed %}
 		<p>
-			<strong><a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a></strong><br/>
-			Pitched by: <a href="{{ author.username }}">@{{ author.username }}</a> | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}<br/>
+			<strong><a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a></strong> (by <a href="{{ author.username }}">@{{ author.username }})</a><br/> 
+			<small>{{ idea.created|timesince }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}</small><br/>
 		</p>
 		{% endfor %}
 	{% else %}

@@ -78,6 +78,7 @@ class Idea(db.Model):
 			"positive": idea.positive,
 			"negative": idea.negative,
 			"comments": idea.comments,
+			"created": idea.created,
 			"extended_steps": extended_steps,
 		}
 		
