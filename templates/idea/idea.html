@@ -44,7 +44,7 @@
 		{% if comments %}
 			{% for a, c, d in comments %}
 			<p style="padding-left: {{ d }}em">
-				<a href="/{{ a.username }}">@{{ a.username }}</a> <small>{{ c.created|timesince }}</small><br/>
+				<a href="/{{ a.username }}">@{{ a.username }}</a> <small>{{ c.created|timesince }} ago</small><br/>
 				{{ c.text|linebreaksbr }}<br/>
 				{% if current_user %}
 				<small><a href="/comment/{{ c.key.id }}/reply">reply</a>{% if current_user.key.id == a.key.id %} | <a href="/comment/{{ c.key.id }}/delete">delete</a>{% endif %}</small>

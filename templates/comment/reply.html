@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block main %}
-<a href="/{{ author.username }}">@{{ author.username }}</a> <small>{{ comment.created|timesince }}</small><br/>
+<a href="/{{ author.username }}">@{{ author.username }}</a> <small>{{ comment.created|timesince }} ago</small><br/>
 {{ comment.text }}<br/>
 <br/>
 <form method="post" action="/comment/{{ comment.key.id }}/reply">
