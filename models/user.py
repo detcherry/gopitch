@@ -10,7 +10,7 @@ class User(db.Model):
 	username = db.StringProperty(required=True)
 	name = db.StringProperty(required=True)
 	img = db.StringProperty(required=False)
-	bio = db.StringProperty(required=False, default="")
+	bio = db.TextProperty(required=False)
 	ideas = db.IntegerProperty(required=True, default=0)
 	email = db.StringProperty(required=False)
 	country = db.StringProperty(required=False)
