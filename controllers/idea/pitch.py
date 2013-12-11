@@ -5,6 +5,7 @@ from controllers.base import BaseHandler
 from controllers.base import login_required
 
 from models.idea import Idea
+from models.tweet import generate_tweet
 
 class IdeaPitchHandler(BaseHandler):
 
@@ -59,17 +60,16 @@ class IdeaPitchHandler(BaseHandler):
 			user.ideas += 1
 			user.put()
 			
-			short_url_length = 22 # See https://dev.twitter.com/docs/api/1.1/get/help/configuration
-			tweet = "I just pitched a new startup idea on @getpitchd: "
+			text = "I just pitched a new startup idea on @getpitchd: " + idea.title
+			url = config.SITE_URL + "/idea/" + str(idea.key().id())
+			tweet = generate_tweet(text, url)
 			
-			characters_left = 140 - len(tweet) - len(" ") - short_url_length
-			if len(idea.title) < characters_left:
-				tweet += idea.title + " "
-			else:
-				tweet += idea.title[characters_left-3] + "..." + " "
+			response = "Congratulations for pitching your idea on getpitchd!"
+			next = "Now, tweet your friends about it!"
 			
-			tweet += config.SITE_URL + "/idea/" + str(idea.key().id())
 			values = {
+				"response": response,
+				"next": next,
 				"tweet": tweet,
 			}
 			path = "idea/tweet.html"
