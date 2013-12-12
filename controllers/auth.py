@@ -57,7 +57,7 @@ class AuthCallbackHandler(BaseHandler):
 							twitter_access_token_secret = str(access_token.secret),
 							username = str(temp_user.screen_name).lower(),
 							name = temp_user.name,
-							img = str(temp_user.profile_image_url),
+							img = str(temp_user.profile_image_url).replace("_normal", ""),
 							bio = temp_user.description,
 						)
 					else:
@@ -67,7 +67,7 @@ class AuthCallbackHandler(BaseHandler):
 						user.twitter_access_token_secret = str(access_token.secret)
 						user.username = str(temp_user.screen_name).lower()
 						user.name = temp_user.name
-						user.img = str(temp_user.profile_image_url)
+						user.img = str(temp_user.profile_image_url).replace("_normal", "") 
 						user.bio = temp_user.description
 					
 					user.put()
