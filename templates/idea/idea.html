@@ -3,8 +3,7 @@
 {% block main %}
 	<h2>{{ extended_idea.title }} (by</strong> <a href="/{{ author.username }}">@{{ author.username }}</a>)</h2>
 	<p>
-		<strong>Pitched</strong> {{ extended_idea.created|timesince }} ago | <strong>Enthusiasts:</strong> {{ extended_idea.positive }} | <strong>Skeptics:</strong> {{ extended_idea.negative }} {% if current_user.key.id == author.key.id or admin %}| <a href="/idea/{{ extended_idea.id }}/delete">Delete</a><br/>
-		{% endif %}
+		<strong>Pitched</strong> {{ extended_idea.created|timesince }} ago | <strong>Enthusiasts:</strong> {{ extended_idea.positive }} | <strong>Skeptics:</strong> {{ extended_idea.negative }} {% if current_user.key.id == author.key.id or admin %}| <a href="/idea/{{ extended_idea.id }}/edit">Edit</a> | <a href="/idea/{{ extended_idea.id }}/delete">Delete</a><br/>{% endif %}
 	</p>
 	{% for extended_step in extended_idea.extended_steps %}
 	<p>

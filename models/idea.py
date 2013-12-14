@@ -18,6 +18,10 @@ class Idea(db.Model):
 	updated = db.DateTimeProperty(auto_now=True)
 
 	@staticmethod
+	def get_current_version():
+		return "0"
+
+	@staticmethod
 	def get_steps(version):
 		steps = []
 		
@@ -57,6 +61,10 @@ class Idea(db.Model):
 		return steps
 	
 	@staticmethod
+	def get_current_steps():
+		return Idea.get_steps(Idea.get_current_version())
+	
+	@staticmethod
 	def get_extended_idea(idea):
 		extended_steps = []
 		steps = Idea.get_steps(idea.version)
@@ -64,11 +72,13 @@ class Idea(db.Model):
 		for i in range(len(steps)):
 			title = steps[i]["title"]
 			question = steps[i]["question"]
+			slug = steps[i]["slug"]
 			answer = idea.answers[i]
 
 			extended_steps.append({
 				"title": title,
 				"question": question,
+				"slug": slug,
 				"answer": answer,
 			})
 			
@@ -83,7 +93,34 @@ class Idea(db.Model):
 		}
 		
 		return extended_idea
+	
+	@staticmethod
+	def validate(request, idea=None):
+		validated = True
+		
+		answers = []
+		title = request.get("title")
+	
+		if title == "":
+			validated = False
+		else:	
+			logging.info("Title: %s" % (title)) 
+			
+			steps = Idea.get_current_steps()
+			if idea:
+				steps = Idea.get_steps(idea.version)
+			
+			for step in steps:
+				attribute = "answer_" + step["slug"]
+				answer = request.get(attribute)
 
+				if answer and len(answer) <= 140:
+					answers.append(answer)
+				else:
+					validated = False
+					break
+		
+		return validated, title, answers
 				
 		
 		

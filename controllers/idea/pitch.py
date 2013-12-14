@@ -8,42 +8,21 @@ from models.idea import Idea
 from models.tweet import generate_tweet
 
 class IdeaPitchHandler(BaseHandler):
-
-	def __init__(self, request, response):
-		super(IdeaPitchHandler, self).__init__(request, response)
-		
-		self.current_version = "0"
-		self.steps = Idea.get_steps(self.current_version)
-
 	@login_required
 	def get(self):	
 		values = {
-			"steps": self.steps,
+			"status": "new",
+			"url": "/idea/pitch",
+			"steps": Idea.get_current_steps(),
 		}
 		path = "idea/pitch.html"
 		self.render(path, values)
 	
 	@login_required
 	def post(self):
-		incorrect = False
-		answers = []
-		title = self.request.get("title")
-				
-		if title == "":
-			incorrect = True
-		else:	
-			logging.info("Title: %s" % (title)) 
-			for step in self.steps:
-				attribute = "answer_" + step["slug"]
-				answer = self.request.get(attribute)
-
-				if answer and len(answer) <= 140:
-					answers.append(answer)
-				else:
-					incorrect = True
-					break
+		validated, title, answers = Idea.validate(self.request)
 		
-		if incorrect:
+		if not validated:
 			self.redirect("/idea/pitch")
 		else:
 			# Record the idea and redirect to homepage
@@ -51,7 +30,7 @@ class IdeaPitchHandler(BaseHandler):
 				title = title,
 				author = self.current_user.key(),
 				answers = answers,
-				version = self.current_version,
+				version = Idea.get_current_version(),
 				country = self.current_user.country,
 			)
 			idea.put()

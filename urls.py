@@ -7,6 +7,7 @@ from controllers.auth import AuthSignoutHandler
 from controllers.auth import AuthCompleteHandler
 from controllers.idea.pitch import IdeaPitchHandler
 from controllers.idea.idea import IdeaHandler
+from controllers.idea.edit import IdeaEditHandler
 from controllers.idea.delete import IdeaDeleteHandler
 from controllers.idea.feedback import IdeaFeedbackHandler
 from controllers.idea.comment import IdeaCommentHandler
@@ -29,6 +30,7 @@ app = webapp2.WSGIApplication(
 		("/auth/complete", AuthCompleteHandler),
 		("/idea/pitch", IdeaPitchHandler),
 		("/idea/([0-9]+)", IdeaHandler),
+		("/idea/([0-9]+)/edit", IdeaEditHandler),
 		("/idea/([0-9]+)/delete", IdeaDeleteHandler),
 		("/idea/([0-9]+)/feedback", IdeaFeedbackHandler),
 		("/idea/([0-9]+)/comment", IdeaCommentHandler),
