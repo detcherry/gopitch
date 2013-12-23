@@ -9,7 +9,7 @@ class User(db.Model):
 	twitter_access_token_secret = db.StringProperty(required=True)
 	username = db.StringProperty(required=True)
 	name = db.StringProperty(required=True)
-	img = db.StringProperty(required=False)
+	image = db.BlobProperty(required=True)
 	bio = db.TextProperty(required=False)
 	ideas = db.IntegerProperty(required=True, default=0)
 	email = db.StringProperty(required=False)

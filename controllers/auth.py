@@ -7,6 +7,9 @@ from datetime import timedelta
 from tweepy import auth
 from tweepy.api import API
 
+from google.appengine.ext import db
+from google.appengine.api import urlfetch
+
 from controllers import config
 from controllers.base import BaseHandler
 
@@ -48,16 +51,18 @@ class AuthCallbackHandler(BaseHandler):
 					logging.info("Connecting to the Twitter API")
 					api = API(handler, secure=False)
 					temp_user = api.verify_credentials()
+					temp_image = urlfetch.Fetch(str(temp_user.profile_image_url).replace("_normal", "")).content
 					
 					if not user:
 						logging.info("User did not exist")
+	
 						user = User(
 							twitter_id = str(temp_user.id),
 							twitter_access_token_key = str(access_token.key),
 							twitter_access_token_secret = str(access_token.secret),
 							username = str(temp_user.screen_name).lower(),
 							name = temp_user.name,
-							img = str(temp_user.profile_image_url).replace("_normal", ""),
+							image = db.Blob(temp_image),
 							bio = temp_user.description,
 						)
 					else:
@@ -67,7 +72,7 @@ class AuthCallbackHandler(BaseHandler):
 						user.twitter_access_token_secret = str(access_token.secret)
 						user.username = str(temp_user.screen_name).lower()
 						user.name = temp_user.name
-						user.img = str(temp_user.profile_image_url).replace("_normal", "") 
+						user.image = db.Blob(temp_image)
 						user.bio = temp_user.description
 					
 					user.put()

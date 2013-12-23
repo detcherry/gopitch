@@ -30,6 +30,20 @@ def login_required(method):
 
 	return wrapper
 
+
+def admin_required(method):
+	@wraps(method)
+	def wrapper(self, *args, **kwargs):
+		if not self.admin:
+			if self.request.method == "GET":
+				self.redirect("/")
+				return
+			self.error(403)
+		else:
+			return method(self, *args, **kwargs)
+
+	return wrapper
+
 class BaseHandler(webapp2.RequestHandler):
 	# Custom rendering function
 	def render(self, path, values):

@@ -15,7 +15,10 @@ from controllers.comment.reply import CommentReplyHandler
 from controllers.comment.delete import CommentDeleteHandler
 from controllers.feedback.delete import FeedbackDeleteHandler
 from controllers.user.user import UserHandler
+from controllers.user.image import UserImageHandler
 from controllers.user.tweet import UserTweetHandler
+from controllers.admin.update import AdminUpdateHandler
+from controllers.queue.update import QueueUpdateHandler
 
 config = {}
 config["webapp2_extras.sessions"] = {
@@ -37,8 +40,11 @@ app = webapp2.WSGIApplication(
 		("/comment/([0-9]+)/reply", CommentReplyHandler),
 		("/comment/([0-9]+)/delete", CommentDeleteHandler),
 		("/feedback/([0-9_]+)/delete", FeedbackDeleteHandler),
-		("/user/tweet", UserTweetHandler),
 		("/(\w+)", UserHandler),
+		("/(\w+)/image", UserImageHandler),
+		("/user/tweet", UserTweetHandler),
+		("/admin/update", AdminUpdateHandler),
+		("/queue/update", QueueUpdateHandler),
 		("/.*", HomeHandler),
 	],
 	config = config,
