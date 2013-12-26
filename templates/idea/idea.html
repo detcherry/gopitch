@@ -1,61 +1,87 @@
-{% extends "base.html" %}
+{% extends "narrow.html" %}
 
-{% block main %}
-	<h2>{{ extended_idea.title }} (by</strong> <a href="/{{ author.username }}">@{{ author.username }}</a>)</h2>
-	<p>
-		<strong>Pitched</strong> {{ extended_idea.created|timesince }} ago | <strong>Enthusiasts:</strong> {{ extended_idea.positive }} | <strong>Skeptics:</strong> {{ extended_idea.negative }} {% if current_user.key.id == author.key.id or admin %}| <a href="/idea/{{ extended_idea.id }}/edit">Edit</a> | <a href="/idea/{{ extended_idea.id }}/delete">Delete</a><br/>{% endif %}
-	</p>
+{% block meta %}
+<title>{{ extended_idea.title }} (by @{{ author.username }})</title>
+<meta name="description" content="{{ extended_idea.extended_steps.1.answer }}">
+{% endblock %}
+
+{% block corner %}
+	{% if current_user.key.id == author.key.id or admin %}
+	<a href="/idea/{{ extended_idea.id }}/edit" class="btn btn-default">Edit</a>
+	{% else %}
+		{% if feedback %}
+		<form role="form" method="post" action="/feedback/{{ feedback.key.name }}/delete" class="delete">
+			You're {% if feedback.content == "positive" %}enthusiastic{% else %}skeptical{% endif %}
+			<input type="submit" value="Cancel" class="btn btn-default" />
+		</form>
+		{% endif %}
+	{% endif %}
+{% endblock %}
+
+{% block narrow %}
+<div class="idea">
+	<h2>{{ extended_idea.title }}</h2>
+	<small>
+		<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"> <a href="/{{ author.username }}">@{{ author.username }}</a> | {{ extended_idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ extended_idea.positive }} | Skeptics: {{ extended_idea.negative }}
+	</small>
 	{% for extended_step in extended_idea.extended_steps %}
-	<p>
-		<em>{{ extended_step.title }}</em><br/>
-		{{ extended_step.answer }}
-	</p>
+	<h3>{{ extended_step.title }}</h3>
+	<div class="answer">{{ extended_step.answer }}</div>
 	{% endfor %}
 	{% if not current_user %}
-		<p>Read more startup ideas by <a href="/auth/signin">signing in with Twitter</a><br/></p>
+		<div class="not-logged-in">
+			To comment: <a href="/auth/signin" class="btn btn-default">Sign in with Twitter</a>
+		</div>
 	{% else %}
 		{% if current_user.key.id != author.key.id %}
-			{% if feedback %}
-			Feedback sent to @{{ author.username}}:<strong> {% if feedback.content == "positive" %}I'm enthusiast{% else %}I'm skeptic{% endif %}!</strong>
-			<form method="post" action="/feedback/{{ feedback.key.name }}/delete">
-				<input type="submit" value="Delete Feedback"/>
-			</form>
-			{% else %}
-			<strong>Hey, how do you feel about this idea?</strong>
-			<form method="post" action="/idea/{{ extended_idea.id }}/feedback">
-				<input type="radio" name="feedback" value="positive" id="positive">
-				<label for="positive">I'm enthusiastic</label><br/>
-				<input type="radio" name="feedback" value="negative" id="negative">
-				<label for="negative">I'm skeptical</label><br/>
-				<br/>
-				<strong>What are you enthusiastic/skeptical about exactly?</strong> (optional)<br/>
-				<textarea rows="6" cols="60" name="text"></textarea><br/>
-				<br/>
-				<input type="submit" value="Send Feedback">
+			{% if not feedback %}
+			<form role="form" method="post" action="/idea/{{ extended_idea.id }}/feedback" class="feedback">
+				<div class="form-group">
+					<h4>What do you think about this idea?</h4>
+					<input type="radio" name="feedback" value="positive" id="positive">
+					<label for="positive">I'm enthusiastic</label><br/>
+					<input type="radio" name="feedback" value="negative" id="negative">
+					<label for="negative">I'm skeptical</label>
+				</div>
+				<div class="form-group">
+					<h4>Can you give more feedback?</h4>
+					<textarea rows="6" cols="60" name="text" class="form-control"></textarea>
+					<em>(optional)</em>
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Send Feedback" class="btn btn-primary">
+				</div>
 			</form>
 			{% endif %}
 		{% endif %}
 		{% if current_user.key.id == author.key.id or feedback %}
-		<form method="post" action="/idea/{{ extended_idea.id }}/comment">
-			<textarea rows="6" cols="60" name="text"></textarea><br/>
-			<input type="submit" value="Comment">
+		<form role="form" method="post" action="/idea/{{ extended_idea.id }}/comment" class="comment">
+			<div class="form-group">
+				<textarea rows="6" cols="60" name="text" class="form-control"></textarea>
+			</div>
+			<div class="form-group">
+				<input type="submit" value="Comment" class="btn btn-primary">
+			</div>
 		</form>
 		{% endif %}
 	{% endif %}
-	<p>
-		<strong>Comments:</strong><br/>
+		<h3>Comments:</h3>
 		{% if comments %}
 			{% for a, c, d in comments %}
-			<p style="padding-left: {{ d }}em">
-				<a href="/{{ a.username }}">@{{ a.username }}</a> <small>{{ c.created|timesince }} ago</small><br/>
-				{{ c.text|linebreaksbr }}<br/>
-				{% if current_user %}
-				<small><a href="/comment/{{ c.key.id }}/reply">reply</a>{% if current_user.key.id == a.key.id %} | <a href="/comment/{{ c.key.id }}/delete">delete</a>{% endif %}</small>
-				{% endif %}
-			</p>
+			<div class="comment" style="padding-left: {{ d }}em">
+				<a href="/{{ a.username }}" class="author-pic" style="background-image:url('/{{ a.username }}/image')"></a>
+				<div class="comment-content">
+					<small><a href="/{{ a.username }}">@{{ a.username }}</a> | {{ c.created|timesince|upto:',' }} ago</small><br/>
+					{{ c.text|linebreaksbr }}<br/>
+					{% if current_user %}
+					<small><a href="/comment/{{ c.key.id }}/reply">reply</a>{% if current_user.key.id == a.key.id %} | <a href="/comment/{{ c.key.id }}/delete">delete</a>{% endif %}</small>
+					{% endif %}
+				</div>
+			</div>
 			{% endfor %}
 		{% else %}
 		No comment so far
 		{% endif %}
 	</p>
+</div>
 {% endblock %}

@@ -1,19 +1,24 @@
-{% extends "base.html" %}
+{% extends "narrow.html" %}
 
-{% block main %}
-
-<p>Please, complete your profile</p>
+{% block narrow %}
+<h2>Complete your profile</h2>
 <!-- TODO: JS to pre-control the form -->
-<form method="post" action="/auth/complete">
-	<label for="email">Email: </label><input type="text" name="email"/><br/>
-	<label for="country">Country: </label>
-	<select name="country">
-		<option></option>
-		{% for country in countries %}
-		<option value="{{ country.code }}">{{ country.name }}</option>
-		{% endfor %}
-	</select><br/>
-	<br/>
-	<input type="submit" value="Submit"/>
+<form role="form" method="post" action="/auth/complete">
+	<div class="form-group">
+		<label for="email">Email: </label>
+		<input type="text" name="email" class="form-control"/>
+	</div>
+	<div class="form-group">
+		<label for="country">Country: </label>
+		<select name="country" class="form-control">
+			<option></option>
+			{% for country in countries %}
+			<option value="{{ country.code }}">{{ country.name }}</option>
+			{% endfor %}
+		</select>
+	</div>
+	<div class="form-group">
+		<input type="submit" value="Submit" class="btn btn-primary"/>
+	</div>
 </form>
 {% endblock %}

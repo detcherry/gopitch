@@ -59,7 +59,7 @@ class IdeaFeedbackHandler(BaseHandler):
 						url = config.SITE_URL + "/idea/" + str(idea.key().id())
 						tweet = generate_tweet(text, url)
 						
-						response = "Thanks for giving your positive feedback to @" + author.username + "!"
+						response = "Feedback sent!"
 						next = "Why not tweeting this idea to your friends?"
 						values = {
 							"response": response,

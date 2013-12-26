@@ -43,7 +43,7 @@ class IdeaPitchHandler(BaseHandler):
 			url = config.SITE_URL + "/idea/" + str(idea.key().id())
 			tweet = generate_tweet(text, url)
 			
-			response = "Congratulations for pitching your idea on getpitchd!"
+			response = "Idea pitched!"
 			next = "Now, tweet your friends about it!"
 			
 			values = {

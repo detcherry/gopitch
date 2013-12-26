@@ -29,7 +29,7 @@ class Idea(db.Model):
 			steps = [{
 				"slug": "problem",
 				"title": "Problem",
-				"question": "What is the problem you're trying to solve? Who has this problem?",
+				"question": "What problem are you trying to solve? Who has it?",
 			},{
 				"slug": "solution",
 				"title": "Solution",

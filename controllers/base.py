@@ -6,6 +6,7 @@ import json
 import webapp2
 
 from django.template.loader import render_to_string
+from django.template.loader import add_to_builtins
 
 from webapp2_extras import sessions
 from functools import wraps
@@ -66,6 +67,8 @@ class BaseHandler(webapp2.RequestHandler):
 			"domain": config.DOMAIN,
 			"google_analytics_id": config.GOOGLE_ANALYTICS_ID,
 		})
+		
+		add_to_builtins('ext.templatetags.custom')
 		self.response.out.write(render_to_string(path, self._values))
 	
 	def dispatch(self):

@@ -1,6 +1,6 @@
-{% extends "base.html" %}
+{% extends "narrow.html" %}
 
-{% block main %}
-<p>{{ response }}</p>
-<p><a href="/">Go back to homepage</a></p>
+{% block narrow %}
+<h2>{{ response }}</h2>
+<p><a href="/" class="btn btn-default">Go back to homepage</a></p>
 {% endblock %}

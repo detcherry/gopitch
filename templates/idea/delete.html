@@ -1,8 +1,9 @@
-{% extends "base.html" %}
+{% extends "narrow.html" %}
 
-{% block main %}
-<form method="post" action="/idea/{{ id }}/delete">
+{% block narrow %}
+<h2>Delete this idea?</h2>
+<form role="form" method="post" action="/idea/{{ id }}/delete">
 	<p>Are you sure you want to delete this idea?</p>
-	<input type="submit" value="Yes"> or <a href="/idea/{{ id }}">Cancel</a>
+	<input type="submit" value="Yes" class="btn btn-primary"> or <a href="/idea/{{ id }}" class="btn btn-default">Cancel</a>
 </form>
 {% endblock %}

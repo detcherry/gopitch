@@ -1,11 +1,15 @@
-{% extends "base.html" %}
+{% extends "narrow.html" %}
 
-{% block main %}
+{% block narrow %}
 <a href="/{{ author.username }}">@{{ author.username }}</a> <small>{{ comment.created|timesince }} ago</small><br/>
 {{ comment.text }}<br/>
 <br/>
-<form method="post" action="/comment/{{ comment.key.id }}/reply">
-	<textarea rows="6" cols="60" maxlength="140" name="text"></textarea><br/>
-	<input type="submit" value="Reply">
+<form role="form" method="post" action="/comment/{{ comment.key.id }}/reply">
+	<div class="form-group">
+		<textarea rows="6" cols="60" maxlength="140" name="text" class="form-control"></textarea>
+	</div>
+	<div class="form-group">
+		<input type="submit" value="Reply" class="btn btn-primary"> or <a href="/idea/{{ comment.idea.key.id }}" class="btn btn-default">Cancel</a>
+	</div>
 </form>
 {% endblock %}

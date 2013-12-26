@@ -17,7 +17,9 @@ class HomeHandler(BaseHandler):
 		
 			values.update({
 				"feed": zip(ideas, authors),
-			})
-			
-		path = "home.html"
+			})		
+			path = "home.html"
+		else:
+			path = "welcome.html"
+	
 		self.render(path, values)

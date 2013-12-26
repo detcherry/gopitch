@@ -1,16 +1,35 @@
-{% extends "base.html" %}
+{% extends "2-columns.html" %}
 
-{% block main %}
-<h2><a href="/{{ user.username }}">@{{ user.username }}</a></h2>
-<p><strong>Ideas:</strong> {{ user.ideas }} | <strong>Pitching since:</strong> {{ user.created|timesince }} ago</p>
-{% if ideas %}
-	{% for idea in ideas %}
-	<p>
-		<a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a> (by <a href="{{ author.username }}">@{{ user.username }})</a><br/>
-		<small>{{ idea.created|timesince }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}</small><br/>
-	</p>
-	{% endfor %}
-{% else %}
-	<p>No idea pitched so far.</p>
-{% endif %}
+{% block meta %}
+<title>{{ user.name }} (@{{ user.username }}) on Getpitchd</title>
+<meta name="description" content="The latest ideas from {{ user.name }} (@{{ user.username }}). {{ user.bio }}">
+{% endblock %}
+
+
+{% block left %}
+	<div class="about">
+		<h3><a href="/{{ user.username }}">@{{ user.username }}</a></h3>
+		<h4>{{ user.name }}</h4>
+		<p class="description">
+			{{ user.bio }}
+		<p>
+		<p>Ideas: {{ user.ideas }}</p>
+	</div>
+{% endblock %}
+
+{% block right %}
+	<div class="feed-header">
+		<h2>MOST RECENT</h2>
+	</div>
+	{% if ideas %}
+		{% for idea in ideas %}
+		<div class="idea">
+			<a href="/{{ user.username }}" class="author-pic" style="background-image:url('/{{ user.username }}/image')"></a>
+			<h3><a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a></h3>
+			<small><a href="{{ user.username }}">@{{ user.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}</small><br/>
+		</div>
+		{% endfor %}
+	{% else %}
+		<div>No idea pitched so far.</div>
+	{% endif %}
 {% endblock %}

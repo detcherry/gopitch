@@ -21,6 +21,7 @@ class IdeaEditHandler(BaseHandler):
 				values = {
 					"status": "edit",
 					"title": extended_idea["title"],
+					"id": extended_idea["id"],
 					"url": "/idea/" + str(extended_idea["id"]) + "/edit",
 					"steps": extended_idea["extended_steps"],
 				}
@@ -52,7 +53,7 @@ class IdeaEditHandler(BaseHandler):
 					idea.put()
 			
 					values = {
-						"response": "Your idea has been updated."
+						"response": "Idea updated"
 					}
 					path = "feedback.html"		
 					self.render(path, values)

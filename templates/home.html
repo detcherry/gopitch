@@ -1,35 +1,31 @@
-{% extends "base.html" %}
+{% extends "2-columns.html" %}
 
-{% block main %}
-
-{% if current_user %}
-	Hello <a href="{{ current_user.username }}">@{{ current_user.username }}</a><br/>
-	<a href="/idea/pitch">Pitch a new idea</a><br/>
-	{% if feed%}
-		<h3>Latest ideas:</h3>
-		{% for idea, author in feed %}
+{% block left %}
+	<div class="about">
+		<h3>About</h3>
+		<p class="description">
+			The best place for developers, marketers, designers to pitch or get pitched their new startup idea.
 		<p>
-			<strong><a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a></strong> (by <a href="{{ author.username }}">@{{ author.username }})</a><br/> 
-			<small>{{ idea.created|timesince }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}</small><br/>
-		</p>
-		{% endfor %}
-	{% else %}
-	<p>
-		No startup idea has been pitched here so far. <br/>
-		Pitch one <a href="/idea/pitch">here</a>.
-	</p>
-	{% endif %}
-	<p>
-		<br/>
-		<a href="/auth/signout">Sign out from Twitter</a>
-	</p>
-{% else %}
-	<p>
-		Pitch or get pitched a new startup idea.
-	</p>
-	<p>
-		<a href="/auth/signin">Sign in with Twitter</a>
-	</p>
-{% endif %}
+		<p><a href="{{ current_user.username }}">@{{ current_user.username }}</a> | <a href="/auth/signout">Sign out</a></p>
+	</div>
+{% endblock %}
 
-{% endblock %}	
+{% block right %}
+		<div class="feed-header">
+			<h2>MOST RECENT</h2><a class="btn btn-default" href="/idea/pitch">Pitch a new idea</a>
+		</div>
+		{% if feed %}
+			{% for idea, author in feed %}
+			<div class="idea">
+				<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"></a>
+				<h3><a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a></h3>
+				<small><a href="{{ author.username }}">@{{ author.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}</small>
+			</div>
+			{% endfor %}
+		{% else %}
+		<div>
+			No startup idea has been pitched here so far.<br/>
+			Pitch an idea <a href="/idea/pitch">here</a>.
+		</div>
+		{% endif %}
+{% endblock %}

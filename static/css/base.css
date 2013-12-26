@@ -1,0 +1,397 @@
+/*
+
+	Font Families:
+	- Titles: Helvetica Neue, Helvetic, Arial, sans-serif
+	- Text: Merriweather, Georgia, serif
+	
+	Font Sizes:
+	
+	Sans-serif
+	- h2: 34px
+	- h3: 30px
+	
+	Serif
+	- Text: 18px 
+	
+	Font Weights/Styles:
+	- h1, h2: bold, italic
+	- h3: normal, normal
+	- text: normal, normal
+	
+	Colors:
+	- rgb(51,51,51)
+	- rgb(102,102,102)
+	- rgb(179,179,179)
+	- rgb(222,222,222)
+	- white
+	
+	Buttons:
+	- Primary: background, border
+	- Default: no background, only border
+	
+*/
+
+body{
+	font-family: 'Merriweather', "Georgia", serif;
+	font-size:18px;
+	font-weight:300;
+}
+
+.navbar-default{
+	display:none;
+	background:rgb(51,51,51);
+	border-color:rgb(51,51,51);
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	-o-border-radius:0px;
+	border-radius:0px;
+}
+
+.navbar-default a.navbar-brand, .navbar-default a.navbar-brand:hover{
+	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-transform:uppercase;
+	font-style:italic;
+	font-weight:bold;
+	color:white;
+}
+
+.navbar-default .navbar-toggle, .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+	border-color:rgb(179,179,179);
+	background:transparent;
+}
+
+.navbar-default .navbar-toggle .icon-bar{
+	background-color:rgb(179,179,179);
+}
+
+.navbar-default .navbar-collapse{
+	border-color:rgb(179,179,179);
+}
+
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:hover{
+	color:white;
+	font-size:16px;
+}
+
+.btn{
+	padding:10px 20px;
+	font-size:16px;
+	-webkit-border-radius:20px;
+	-moz-border-radius:20px;
+	-o-border-radius:20px;
+	border-radius:20px;
+}
+
+.btn-default, .btn-default:hover{
+	background:none;
+}
+
+.btn-primary, .btn-primary:hover{
+	background:rgb(51,51,51);
+	border-color:rgb(51,51,51);
+}
+
+.form-control{
+	height:42px;
+	padding:12px 8px;
+	font-size:18px;
+	color:black;
+	-webkit-border-radius:0px;
+	-moz-border-radius:0px;
+	-o-border-radius:0px;
+	border-radius:0px;
+}
+
+h1.logo{
+	float:left;
+	padding:10px 14px;
+	width:156px;
+	text-transform:uppercase;
+	font-weight:bold;
+	font-style:italic;
+	font-size:22px;
+	background:rgb(51,51,51);
+}
+
+h1.logo a, h1.logo a:hover, h1.logo a:visited, h1.logo a:focus{
+	color:white;
+	text-decoration:none;
+}
+
+a.author-pic{
+	background-size:cover;
+	-webkit-box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.75);
+	box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.75);
+}
+
+/* --- NARROW TEMPLATE ---*/
+
+.corner{
+	margin-top:20px;
+	float:right;
+}
+
+.corner .btn{
+	margin-left:6px;
+}
+
+.narrow{
+	margin:auto;
+	width:550px;
+	padding-bottom:50px;
+}
+
+@media (max-width: 767px){
+	.narrow{
+		width:100%;
+	}
+	
+	.corner{
+		display:none;
+	}
+}
+
+.narrow h2{
+	font-size:34px;
+	letter-spacing:-2px;
+	font-weight:bold;
+	font-style:italic;
+}
+
+.narrow h2:after{
+	content:'';
+	background:rgb(222,222,222);
+	height:1px;
+	width:100px;
+	display:block;
+	margin:30px auto 30px;
+}
+
+.narrow h2{
+	text-align:center;
+}
+
+/*--- PITCH ---*/
+
+.pitch h3{
+	font-weight:bold;
+	color:rgb(51,51,51);
+}
+
+.pitch label{
+	color:rgb(102,102,102);
+}
+
+.pitch em{
+	float:right;
+	margin-top:6px;
+	font-size:85%;
+	color:rgb(179,179,179)
+}
+
+/*--- IDEA ---*/
+
+.idea form.feedback em{
+	float:right;
+	margin-top:6px;
+	font-size:85%;
+	color:rgb(179,179,179)
+}
+
+.idea form.feedback:before, .idea form.comment:before, .idea .not-logged-in:before, .idea .not-logged-in:after{
+	content:'';
+	background:rgb(222,222,222);
+	height:1px;
+	width:120px;
+	display:block;
+	margin:30px auto 30px;
+}
+
+.idea small, .idea small a, .idea small a:hover{
+	color:rgb(179,179,179);
+}
+
+.idea a.author-pic{
+	float:left;
+	margin-right:6px;
+	height:30px;
+	width:30px;
+	-webkit-border-radius:15px;
+	-moz-border-radius:15px;
+	-o-border-radius:15px;
+	border-radius:15px;
+}
+
+.idea div.comment{
+	padding-top:10px;
+	clear:left;
+}
+
+.idea .comment-content{
+	float:left;
+}
+
+/*--- 2 COLUMNS TEMPLATE ---*/
+
+.left{
+	position:fixed;
+	width:300px;
+	padding:10px;
+	height:100%;
+	background: url(../images/background.jpg) no-repeat center center; 
+	-webkit-background-size:cover;
+  	-moz-background-size:cover;
+  	-o-background-size:cover;
+  	background-size:cover;
+}
+
+.left h1{
+	margin-top:0px;
+}
+
+.left, .left a, .left a:hover{
+	color:white;
+}
+
+.left .about{
+	position:fixed;
+	width:300px;
+	padding:20px;
+	bottom:0px;
+}
+
+.left .about p{
+	font-size:14px;
+	line-height:24px;
+	text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
+}
+
+.left .about p.description:after{
+	content:'';
+	background:rgb(222,222,222);
+	height:1px;
+	width:120px;
+	display:block;
+	margin:10px 0px;
+}
+
+.right{
+	margin-left:300px;
+	padding-top:50px;
+	padding-bottom:50px;
+	padding-left:7%;
+	padding-right:7%;
+}
+
+.right .feed-header{
+	float:left;
+	width:100%;
+	margin-bottom:20px;
+	padding-bottom:15px;
+	border-bottom:1px solid #dededc;
+}
+
+.right .feed-header a.btn{
+	float:right;
+}
+
+.right .feed-header h2{
+	float:left;
+	margin-top:14px;
+	font-size:18px;
+	letter-spacing:1px;
+	text-transform:uppercase;
+}
+
+.right .idea{
+	float:left;
+	width:100%;
+	padding:15px 0px;
+}
+
+.right .idea a.author-pic{
+	display:block;
+	float:right;
+	margin-left:15px;
+	height:60px;
+	width:60px;
+	-webkit-border-radius:30px;
+	-moz-border-radius:30px;
+	-o-border-radius:30px;
+	border-radius:30px;
+}
+
+.right .idea h3{
+	margin:0px;
+	margin-bottom:6px;
+	font-weight:bold;
+}
+
+.right .idea h3 a, .right .idea h3 a:hover{
+	color:rgb(51,51,51);
+}
+
+.right .idea small, .right .idea small a, .right .idea small a:hover{
+	color:rgb(179, 179, 179);
+}
+
+@media (max-width: 767px){
+	.left{
+		display:none;
+	}
+	
+	.right{
+		margin-left:0px;
+		padding-top:10px;
+	}
+	
+	.navbar-default{
+		display:block;
+	}
+}
+
+@media (max-width: 767px){
+	.right .feed-header a.btn{
+		display:none;
+	}
+}
+
+/* --- WELCOME PAGE --- */
+
+.background{
+	position:fixed;
+	top:0px;
+	z-index:-1;
+	height:100%;
+	width:100%;
+	background: url(../images/background.jpg) no-repeat center center fixed; 
+	-webkit-background-size:cover;
+  	-moz-background-size:cover;
+  	-o-background-size:cover;
+  	background-size:cover;
+}
+
+.welcome{
+	color:white;
+	text-align:center;	
+}
+
+.welcome h1{
+	margin-top:260px;
+	margin-bottom:20px;
+	font-size:7vw;
+	font-style:italic;
+	font-weight:bold;
+	text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
+	text-transform:uppercase;
+}
+
+.welcome p.description{
+	margin-bottom:30px;
+}
+
+.welcome a.btn{
+	color:white;
+	border-color:white;
+}
