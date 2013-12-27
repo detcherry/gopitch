@@ -2,9 +2,9 @@
 
 {% block narrow %}
 <h2>{{ response }}</h2>
-<h3>{{ next }}</h3>
+<h3>{{ call_to_action }}</h3>
 <form role="form" method="post" action="/user/tweet">
 	<textarea name="tweet" rows="3" cols="60" maxlength="140" class="form-control">{{ tweet }}</textarea><br/>
-	<input type="submit" value="Tweet" class="btn btn-primary"/> or <a href="/" class="btn btn-default">Skip this</a>
+	<input type="submit" value="Tweet" class="btn btn-primary"/> or <a href="{{ skip_url  }}" class="btn btn-default">Skip this</a>
 </form>
 {% endblock %}

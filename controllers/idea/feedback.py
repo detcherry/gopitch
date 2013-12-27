@@ -59,19 +59,24 @@ class IdeaFeedbackHandler(BaseHandler):
 						url = config.SITE_URL + "/idea/" + str(idea.key().id())
 						tweet = generate_tweet(text, url)
 						
-						response = "Feedback sent!"
-						next = "Why not tweeting this idea to your friends?"
+						response = "Feedback sent"
+						call_to_action = "Why not tweeting this idea to your friends?"
 						values = {
 							"response": response,
-							"next": next,
+							"call_to_action": call_to_action,
 							"tweet": tweet,
+							"skip_url": "/idea/" + str(idea.key().id()),
 						}
 						
 						path = "idea/tweet.html"
 						
 					else:
 						values = {
-							"response": "Thanks for giving your feedback!"
+							"response": "Thanks for your feedback",
+							"next": {
+								"content": "Back",
+								"url": "/idea/"+str(idea.key().id()),
+							}
 						}	
 						path = "feedback.html"
 					

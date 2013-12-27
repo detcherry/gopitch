@@ -50,10 +50,16 @@ class CommentDeleteHandler(BaseHandler):
 				idea.put()
 				comment.delete() 
 				
-				# Note: children comments of a deleted comment won't be displayed but they still remain in the comments counter.
+				# Note: 
+				# children comments of a deleted comment won't be displayed
+				# but they still remain in the comments counter.
 								
 				values = {
-					"response": "Comment deleted."
+					"response": "Comment deleted",
+					"next": {
+						"content": "Back",
+						"url": "/idea/"+str(idea.key().id()),
+					}
 				}
 				path = "feedback.html"		
 				self.render(path, values)

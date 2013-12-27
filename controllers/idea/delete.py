@@ -31,7 +31,11 @@ class IdeaDeleteHandler(BaseHandler):
 				user.put()
 		
 				values = {
-					"response": "Your idea has been deleted."
+					"response": "Your idea has been deleted.",
+					"next": {
+						"content": "Back to homepage",
+						"url":"/",
+					}
 				}
 				path = "feedback.html"		
 				self.render(path, values)

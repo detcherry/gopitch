@@ -30,7 +30,11 @@ class FeedbackDeleteHandler(BaseHandler):
 				feedback.delete()
 						
 				values = {
-					"response": "Feedback deleted."
+					"response": "Feedback deleted",
+					"next":{
+						"content": "Back",
+						"url": "/idea/"+str(idea.key().id()),
+					}
 				}
 				path = "feedback.html"		
 				self.render(path, values)

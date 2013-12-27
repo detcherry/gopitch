@@ -51,7 +51,11 @@ class CommentReplyHandler(BaseHandler):
 				idea.put()
 				
 				values = {
-					"response" : "Replied sent."
+					"response" : "Replied sent",
+					"next":{
+						"content": "Back",
+						"url": "/idea/"+str(idea.key().id())
+					}
 				}
 				path = "feedback.html"
 				self.render(path, values)

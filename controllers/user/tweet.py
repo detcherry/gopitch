@@ -21,13 +21,17 @@ class UserTweetHandler(BaseHandler):
 			
 			try:
 				api.update_status(tweet)
-				response = "Tweet successfully sent."
+				response = "Tweet successfully sent"
 			except tweepy.TweepError:
 				logging.error("Could not send tweet.")
 				response = "Could not send your tweet. Please try again later."
 			
 			values = {
-				"response": response
+				"response": response,
+				"next":{
+					"content": "Back to homepage",
+					"url": "/",
+				}
 			}
 			path = "feedback.html"
 			self.render(path, values)				

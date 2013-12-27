@@ -43,13 +43,14 @@ class IdeaPitchHandler(BaseHandler):
 			url = config.SITE_URL + "/idea/" + str(idea.key().id())
 			tweet = generate_tweet(text, url)
 			
-			response = "Idea pitched!"
-			next = "Now, tweet your friends about it!"
+			response = "Idea pitched"
+			call_to_action = "Now, tweet your friends about it!"
 			
 			values = {
 				"response": response,
-				"next": next,
+				"call_to_action": call_to_action,
 				"tweet": tweet,
+				"skip_url": "/idea/"+str(idea.key().id()),
 			}
 			path = "idea/tweet.html"
 			self.render(path, values)

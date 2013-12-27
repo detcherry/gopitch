@@ -53,7 +53,11 @@ class IdeaEditHandler(BaseHandler):
 					idea.put()
 			
 					values = {
-						"response": "Idea updated"
+						"response": "Idea updated",
+						"next": {
+							"content": "Back",
+							"url": "/idea/"+str(idea.key().id()),
+						}
 					}
 					path = "feedback.html"		
 					self.render(path, values)
