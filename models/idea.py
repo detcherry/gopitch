@@ -49,11 +49,11 @@ class Idea(db.Model):
 			},{
 				"slug": "acquisition",
 				"title": "Acquisition",
-				"question": "How will potential users know about you?",
+				"question": "How will you attract potential users/customers?",
 			},{
 				"slug": "milestones",
 				"title": "Milestones",
-				"question": "Are you posting this idea for fun or would you like to dig into it? Find a cofounder?",
+				"question": "Are you posting this idea for fun? To find a cofounder? Get Feedback? Please, tell where you are.",
 			}]
 		else:
 			logging.error("Idea version does not exist...")
