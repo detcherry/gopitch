@@ -76,7 +76,7 @@
 			{{ c.text|linebreaksbr }}
 			</div>
 			{% if current_user %}
-			<small class="comment-actions"><a href="/comment/{{ c.key.id }}/reply">reply</a>{% if current_user.key.id == a.key.id %} | <a href="/comment/{{ c.key.id }}/delete">delete</a>{% endif %}</small>
+			<small class="comment-actions"><a href="/comment/{{ c.key.id }}/reply">reply</a>{% if current_user.key.id == a.key.id or admin %} | <a href="/comment/{{ c.key.id }}/delete">delete</a>{% endif %}</small>
 			{% endif %}
 		</div>
 		{% endfor %}
