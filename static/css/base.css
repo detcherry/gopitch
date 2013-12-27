@@ -82,11 +82,11 @@ body{
 	border-radius:20px;
 }
 
-.btn-default, .btn-default:hover{
+.btn-default, .btn-default:hover, .btn-default:focus{
 	background:none;
 }
 
-.btn-primary, .btn-primary:hover{
+.btn-primary, .btn-primary:hover, .btn-primary:focus{
 	background:rgb(51,51,51);
 	border-color:rgb(51,51,51);
 }
@@ -102,8 +102,16 @@ body{
 	border-radius:0px;
 }
 
+.form-group em{
+	display:block;
+	margin-top:6px;
+	width:100%;
+	text-align:right;
+	font-size:85%;
+	color:rgb(179,179,179)
+}
+
 h1.logo{
-	float:left;
 	padding:10px 14px;
 	width:156px;
 	text-transform:uppercase;
@@ -118,22 +126,79 @@ h1.logo a, h1.logo a:hover, h1.logo a:visited, h1.logo a:focus{
 	text-decoration:none;
 }
 
+h3, h3 a, h3 a:hover{
+	font-weight:bold;
+	color:rgb(51,51,51);
+}
+
 a.author-pic{
+	display:block;
 	background-size:cover;
 	-webkit-box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.75);
 	-moz-box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.75);
 	box-shadow: 0px 0px 1px rgba(50, 50, 50, 0.75);
 }
 
-/* --- NARROW TEMPLATE ---*/
-
-.corner{
-	margin-top:20px;
-	float:right;
+small a.author-pic{
+	float:left;
+	margin-right:6px;
+	height:30px;
+	width:30px;
+	-webkit-border-radius:15px;
+	-moz-border-radius:15px;
+	-o-border-radius:15px;
+	border-radius:15px;
 }
 
-.corner .btn{
-	margin-left:6px;
+small, small a, small a:hover{
+	color:rgb(179,179,179);
+}
+
+/* --- WELCOME PAGE --- */
+
+#welcome .background{
+	position:fixed;
+	top:0px;
+	z-index:-1;
+	height:100%;
+	width:100%;
+	background: url(../images/background.jpg) no-repeat center center fixed; 
+	-webkit-background-size:cover;
+  	-moz-background-size:cover;
+  	-o-background-size:cover;
+  	background-size:cover;
+}
+
+#welcome{
+	color:white;
+	text-align:center;	
+}
+
+#welcome h1.logo{
+	margin-top:260px;
+	margin-bottom:20px;
+	padding:0px;
+	width:100%;
+	font-size:46px; /* moz */
+	font-size:7vw; /* webkit */
+	text-shadow:0px 0px 30px rgba(0, 0, 0, 1);
+	background:none;
+}
+
+#welcome p.description{
+	margin-bottom:30px;
+}
+
+#welcome a.btn{
+	color:white;
+	border-color:white;
+}
+
+/* --- NARROW TEMPLATE ---*/
+
+.options{
+	text-align:right;
+	margin-top:20px;
 }
 
 .narrow{
@@ -147,7 +212,7 @@ a.author-pic{
 		width:100%;
 	}
 	
-	.corner{
+	.options{
 		display:none;
 	}
 }
@@ -174,32 +239,22 @@ a.author-pic{
 
 /*--- PITCH ---*/
 
-.pitch h3{
+#pitch h3{
+	margin-top:5px;
 	font-weight:bold;
-	color:rgb(51,51,51);
 }
 
-.pitch label{
+#pitch .form-group{
+	margin-bottom:5px;
+}
+
+#pitch label{
 	color:rgb(102,102,102);
-}
-
-.pitch em{
-	float:right;
-	margin-top:6px;
-	font-size:85%;
-	color:rgb(179,179,179)
 }
 
 /*--- IDEA ---*/
 
-.idea form.feedback em{
-	float:right;
-	margin-top:6px;
-	font-size:85%;
-	color:rgb(179,179,179)
-}
-
-.idea form.feedback:before, .idea form.comment:before, .idea .not-logged-in:before, .idea .not-logged-in:after{
+#idea .feedback form:before, #idea .not-logged-in:before, #idea .not-logged-in:after{
 	content:'';
 	background:rgb(222,222,222);
 	height:1px;
@@ -208,29 +263,25 @@ a.author-pic{
 	margin:30px auto 30px;
 }
 
-.idea small, .idea small a, .idea small a:hover{
-	color:rgb(179,179,179);
-}
-
-.idea a.author-pic{
-	float:left;
-	margin-right:6px;
-	height:30px;
-	width:30px;
-	-webkit-border-radius:15px;
-	-moz-border-radius:15px;
-	-o-border-radius:15px;
-	border-radius:15px;
-}
-
-.idea div.comment{
+#idea .comment{
 	padding-top:10px;
 	clear:left;
-}
-
-.idea .comment-content{
 	float:left;
 }
+
+.comment-text, .comment-actions{
+	padding-left:36px;
+}
+
+#reply{
+	margin-top:20px;
+}
+
+#reply form{
+	margin-top:10px;
+	padding-left:36px;
+}
+
 
 /*--- 2 COLUMNS TEMPLATE ---*/
 
@@ -250,24 +301,24 @@ a.author-pic{
 	margin-top:0px;
 }
 
-.left, .left a, .left a:hover{
+.left, .left h3, .left h4, .left a, .left a:hover{
 	color:white;
 }
 
-.left .about{
+.left .bottom{
 	position:fixed;
-	width:300px;
-	padding:20px;
+	width:280px;
+	padding:15px;
 	bottom:0px;
 }
 
-.left .about p{
+.left .bottom{
 	font-size:14px;
 	line-height:24px;
 	text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
 }
 
-.left .about p.description:after{
+.left .bottom .description:after{
 	content:'';
 	background:rgb(222,222,222);
 	height:1px;
@@ -284,7 +335,7 @@ a.author-pic{
 	padding-right:7%;
 }
 
-.right .feed-header{
+.feed-header{
 	float:left;
 	width:100%;
 	margin-bottom:20px;
@@ -292,11 +343,7 @@ a.author-pic{
 	border-bottom:1px solid #dededc;
 }
 
-.right .feed-header a.btn{
-	float:right;
-}
-
-.right .feed-header h2{
+.feed-header h2{
 	float:left;
 	margin-top:14px;
 	font-size:18px;
@@ -304,14 +351,17 @@ a.author-pic{
 	text-transform:uppercase;
 }
 
-.right .idea{
+.feed-header a.btn{
+	float:right;
+}
+
+.feed .idea{
 	float:left;
 	width:100%;
 	padding:15px 0px;
 }
 
-.right .idea a.author-pic{
-	display:block;
+.feed .idea a.author-pic{
 	float:right;
 	margin-left:15px;
 	height:60px;
@@ -322,18 +372,9 @@ a.author-pic{
 	border-radius:30px;
 }
 
-.right .idea h3{
+.feed .idea h3{
 	margin:0px;
 	margin-bottom:6px;
-	font-weight:bold;
-}
-
-.right .idea h3 a, .right .idea h3 a:hover{
-	color:rgb(51,51,51);
-}
-
-.right .idea small, .right .idea small a, .right .idea small a:hover{
-	color:rgb(179, 179, 179);
 }
 
 @media (max-width: 767px){
@@ -349,49 +390,15 @@ a.author-pic{
 	.navbar-default{
 		display:block;
 	}
-}
 
-@media (max-width: 767px){
-	.right .feed-header a.btn{
+	.feed-header a.btn{
 		display:none;
 	}
 }
 
-/* --- WELCOME PAGE --- */
+/*--- HOME ---*/
 
-.background{
-	position:fixed;
-	top:0px;
-	z-index:-1;
-	height:100%;
-	width:100%;
-	background: url(../images/background.jpg) no-repeat center center fixed; 
-	-webkit-background-size:cover;
-  	-moz-background-size:cover;
-  	-o-background-size:cover;
-  	background-size:cover;
+.feed .empty a.btn{
+	margin-top:15px;
 }
 
-.welcome{
-	color:white;
-	text-align:center;	
-}
-
-.welcome h1{
-	margin-top:260px;
-	margin-bottom:20px;
-	font-size:7vw;
-	font-style:italic;
-	font-weight:bold;
-	text-shadow: 0px 0px 30px rgba(0, 0, 0, 1);
-	text-transform:uppercase;
-}
-
-.welcome p.description{
-	margin-bottom:30px;
-}
-
-.welcome a.btn{
-	color:white;
-	border-color:white;
-}

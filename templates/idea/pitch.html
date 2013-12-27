@@ -1,13 +1,13 @@
 {% extends "narrow.html" %}
 
-{% block corner %}
-{% if status == "edit" %}<a href="/idea/{{ id }}/delete" class="btn btn-default">Delete</a>{% endif %}
+{% block options %}
+	{% if status == "edit" %}<a href="/idea/{{ id }}/delete" class="btn btn-default">Delete</a>{% endif %}
 {% endblock %}
 
 
 <!-- TODO: JS to pre-control the form -->
 {% block narrow %}
-<div class="pitch">
+<div id="pitch">
 	<h2>{% if status == "new" %}So, what is your big idea?{% else %}Update your idea{% endif %}</h2>
 	<form role="form" method="post" action="{{ url }}">
 		<h3>Elevator Pitch</h3>

@@ -5,7 +5,7 @@
 <meta name="description" content="{{ extended_idea.extended_steps.1.answer }}">
 {% endblock %}
 
-{% block corner %}
+{% block options %}
 	{% if current_user.key.id == author.key.id or admin %}
 	<a href="/idea/{{ extended_idea.id }}/edit" class="btn btn-default">Edit</a>
 	{% else %}
@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block narrow %}
-<div class="idea">
+<div id="idea">
 	<h2>{{ extended_idea.title }}</h2>
 	<small>
 		<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"> <a href="/{{ author.username }}">@{{ author.username }}</a> | {{ extended_idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ extended_idea.positive }} | Skeptics: {{ extended_idea.negative }}
@@ -29,13 +29,14 @@
 	<div class="answer">{{ extended_step.answer }}</div>
 	{% endfor %}
 	{% if not current_user %}
-		<div class="not-logged-in">
-			To comment: <a href="/auth/signin" class="btn btn-default">Sign in with Twitter</a>
-		</div>
+	<div class="not-logged-in">
+		To comment: <a href="/auth/signin" class="btn btn-default">Sign in with Twitter</a>
+	</div>
 	{% else %}
+	<div class="feedback">
 		{% if current_user.key.id != author.key.id %}
 			{% if not feedback %}
-			<form role="form" method="post" action="/idea/{{ extended_idea.id }}/feedback" class="feedback">
+			<form role="form" method="post" action="/idea/{{ extended_idea.id }}/feedback" class="feedback-form">
 				<div class="form-group">
 					<h4>What do you think about this idea?</h4>
 					<input type="radio" name="feedback" value="positive" id="positive">
@@ -55,7 +56,7 @@
 			{% endif %}
 		{% endif %}
 		{% if current_user.key.id == author.key.id or feedback %}
-		<form role="form" method="post" action="/idea/{{ extended_idea.id }}/comment" class="comment">
+		<form role="form" method="post" action="/idea/{{ extended_idea.id }}/comment" class="comment-form">
 			<div class="form-group">
 				<textarea rows="6" cols="60" name="text" class="form-control"></textarea>
 			</div>
@@ -64,24 +65,24 @@
 			</div>
 		</form>
 		{% endif %}
+	</div>
 	{% endif %}
-		<h3>Comments:</h3>
-		{% if comments %}
-			{% for a, c, d in comments %}
-			<div class="comment" style="padding-left: {{ d }}em">
-				<a href="/{{ a.username }}" class="author-pic" style="background-image:url('/{{ a.username }}/image')"></a>
-				<div class="comment-content">
-					<small><a href="/{{ a.username }}">@{{ a.username }}</a> | {{ c.created|timesince|upto:',' }} ago</small><br/>
-					{{ c.text|linebreaksbr }}<br/>
-					{% if current_user %}
-					<small><a href="/comment/{{ c.key.id }}/reply">reply</a>{% if current_user.key.id == a.key.id %} | <a href="/comment/{{ c.key.id }}/delete">delete</a>{% endif %}</small>
-					{% endif %}
-				</div>
+	<h3>Comments:</h3>
+	{% if comments %}
+		{% for a, c, d in comments %}
+		<div class="comment" style="padding-left:{{ d|double }}em">
+			<small><a href="/{{ a.username }}" class="author-pic" style="background-image:url('/{{ a.username }}/image')"></a> <a href="/{{ a.username }}">@{{ a.username }}</a> | {{ c.created|timesince|upto:',' }} ago</small>
+			<div class="comment-text">
+			{{ c.text|linebreaksbr }}
 			</div>
-			{% endfor %}
-		{% else %}
-		No comment so far
-		{% endif %}
+			{% if current_user %}
+			<small class="comment-actions"><a href="/comment/{{ c.key.id }}/reply">reply</a>{% if current_user.key.id == a.key.id %} | <a href="/comment/{{ c.key.id }}/delete">delete</a>{% endif %}</small>
+			{% endif %}
+		</div>
+		{% endfor %}
+	{% else %}
+	No comment so far
+	{% endif %}
 	</p>
 </div>
 {% endblock %}

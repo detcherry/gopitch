@@ -1,19 +1,22 @@
 {% extends "2-columns.html" %}
 
 {% block left %}
-	<div class="about">
+	<div class="bottom home">
 		<h3>About</h3>
-		<p class="description">
+		<div class="description">
 			The best place for developers, marketers, designers to pitch or get pitched their new startup idea.
-		<p>
-		<p><a href="{{ current_user.username }}">@{{ current_user.username }}</a> | <a href="/auth/signout">Sign out</a></p>
+		</div>
+		<div class="misc">
+			<a href="{{ current_user.username }}">@{{ current_user.username }}</a> | <a href="/auth/signout">Sign out</a>
+		</div>
 	</div>
 {% endblock %}
 
 {% block right %}
-		<div class="feed-header">
-			<h2>MOST RECENT</h2><a class="btn btn-default" href="/idea/pitch">Pitch a new idea</a>
-		</div>
+	<div class="feed-header">
+		<h2>Most recent</h2>{% if feed %}<a class="btn btn-default" href="/idea/pitch">Pitch a new idea</a>{% endif %}
+	</div>
+	<div class="feed">
 		{% if feed %}
 			{% for idea, author in feed %}
 			<div class="idea">
@@ -23,9 +26,10 @@
 			</div>
 			{% endfor %}
 		{% else %}
-		<div>
-			No startup idea has been pitched here so far.<br/>
-			Pitch an idea <a href="/idea/pitch">here</a>.
+		<div class="empty">
+			No startup idea has been pitched so far.<br/>
+			<a href="/idea/pitch" class="btn btn-default">Pitch a new idea</a>
 		</div>
 		{% endif %}
+	</div>
 {% endblock %}
