@@ -25,8 +25,14 @@
 			{% for idea in ideas %}
 			<div class="idea">
 				<a href="/{{ user.username }}" class="author-pic" style="background-image:url('/{{ user.username }}/image')"></a>
-				<h3><a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a></h3>
-				<small><a href="{{ user.username }}">@{{ user.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}</small><br/>
+				<h3>
+					<a href="{% if current_user %}/idea/{{ idea.key.id }}{% else %}/auth/signin{% endif%}">
+						{{ idea.title }}
+					</a>
+				</h3>
+				<small>
+					<a href="{{ user.username }}">@{{ user.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}
+				</small>
 			</div>
 			{% endfor %}
 		{% else %}

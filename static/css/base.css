@@ -154,53 +154,6 @@ small, small a, small a:hover{
 	color:rgb(179,179,179);
 }
 
-/* --- WELCOME PAGE --- */
-
-#welcome .background{
-	position:fixed;
-	top:0px;
-	z-index:-1;
-	height:100%;
-	width:100%;
-	background: url(../images/background.jpg) no-repeat center center fixed; 
-	-webkit-background-size:cover;
-  	-moz-background-size:cover;
-  	-o-background-size:cover;
-  	background-size:cover;
-}
-
-#welcome{
-	color:white;
-	text-align:center;	
-}
-
-#welcome h1.logo{
-	margin-top:260px;
-	margin-bottom:20px;
-	padding:0px;
-	width:100%;
-	font-size:46px; /* moz */
-	font-size:7vw; /* webkit */
-	text-shadow:0px 0px 30px rgba(0, 0, 0, 1);
-	background:none;
-}
-
-#welcome p.description{
-	margin-bottom:30px;
-}
-
-#welcome a.btn{
-	color:white;
-	border-color:white;
-}
-
-#welcome .credits{
-	position:fixed;
-	bottom:10px;
-	right:10px;
-	font-size:9px;
-}
-
 /* --- NARROW TEMPLATE ---*/
 
 .options{

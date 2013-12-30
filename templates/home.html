@@ -6,23 +6,38 @@
 		<div class="description">
 			The best place for developers, marketers, designers to pitch or get pitched their new startup idea.
 		</div>
+
 		<div class="misc">
+			{% if current_user %}
 			<a href="{{ current_user.username }}">@{{ current_user.username }}</a> | <a href="/auth/signout">Sign out</a>
+			{% else %}
+			<small>
+				<a href="http://www.flickr.com/photos/leweb3/8969204693/in/set-72157633967789303" target="_blank">
+					Photo credits: @leweb
+				</a>
+			</small>
+			{% endif %}
 		</div>
 	</div>
 {% endblock %}
 
 {% block right %}
 	<div class="feed-header">
-		<h2>Most recent</h2>{% if feed %}<a class="btn btn-default" href="/idea/pitch">Pitch a new idea</a>{% endif %}
+		<h2>Most recent</h2>{% if feed %}<a class="btn btn-default" href="{% if current_user %}/idea/pitch{% else %}/auth/signin{% endif %}">Pitch a new idea</a>{% endif %}
 	</div>
 	<div class="feed">
 		{% if feed %}
 			{% for idea, author in feed %}
 			<div class="idea">
 				<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"></a>
-				<h3><a href="/idea/{{ idea.key.id }}">{{ idea.title }}</a></h3>
-				<small><a href="{{ author.username }}">@{{ author.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}</small>
+				<h3>
+					<a href="{% if current_user %}/idea/{{ idea.key.id }}{% else %}/auth/signin{% endif %}">
+						{{ idea.title }}
+					</a>
+				</h3>
+				<small>
+					<a href="/{{ author.username }}">@{{ author.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}
+				</small>
 			</div>
 			{% endfor %}
 		{% else %}
