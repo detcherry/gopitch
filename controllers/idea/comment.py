@@ -28,7 +28,11 @@ class IdeaCommentHandler(BaseHandler):
 				idea.put()
 
 				values = {
-					"response": "Comment posted."
+					"response": "Comment posted",
+					"next":{
+						"content": "Back",
+						"url": "/idea/"+str(idea.key().id()),
+					}
 				}
 				path = "feedback.html"
 				self.render(path, values)
