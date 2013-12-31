@@ -16,7 +16,7 @@ class CommentDeleteHandler(BaseHandler):
 		if(comment):
 			author_key = Comment.author.get_value_for_datastore(comment)
 		
-			if(author_key == self.current_user.key()):
+			if(author_key == self.current_user.key() or self.admin):
 				
 				idea_key = Comment.idea.get_value_for_datastore(comment)
 				idea = Idea.get(idea_key)
@@ -41,7 +41,8 @@ class CommentDeleteHandler(BaseHandler):
 		if(comment):
 			author_key = Comment.author.get_value_for_datastore(comment)
 			
-			if(author_key == self.current_user.key()):
+			logging.info(self.admin)
+			if(author_key == self.current_user.key() or self.admin):
 
 				idea_key = Comment.idea.get_value_for_datastore(comment)
 				idea = Idea.get(idea_key)
