@@ -51,7 +51,7 @@ class CommentReplyHandler(BaseHandler):
 				idea.put()
 				
 				values = {
-					"response" : "Replied sent",
+					"response" : "Reply sent",
 					"next":{
 						"content": "Back",
 						"url": "/idea/"+str(idea.key().id())
