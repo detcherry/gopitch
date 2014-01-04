@@ -28,6 +28,7 @@ class AuthSigninHandler(BaseHandler):
 		# Save the Twitter request key and secret in the session
 		self.session["request_token_key"] = handler.request_token.key
 		self.session["request_token_secret"] = handler.request_token.secret
+		self.session["next"] = self.request.get("next")
 		self.session["referer"] = self.request.referer
 		
 		self.redirect(authorization_url)
@@ -88,8 +89,12 @@ class AuthCallbackHandler(BaseHandler):
 			logging.error("No verifier")
 			print "Error"
 		
-		# Redirect users to the page they came from
-		self.redirect(str(self.session.get("referer")))
+		# Redirect users to the page they came from or the page they're supposed to head to
+		next = self.session.get("next")
+		redirect = self.session.get("referer")
+		if next:
+			redirect = next
+		self.redirect(str(redirect))
 
 class AuthSignoutHandler(BaseHandler):
 	def get(self):
@@ -130,7 +135,14 @@ class AuthCompleteHandler(BaseHandler):
 			user.email = user_email
 			user.country = user_country
 			user.put()	
-			self.redirect("/")
+			
+			# Redirect users to the page they came from or the page they're supposed to head to
+			next = self.session.get("next")
+			redirect = self.session.get("referer")
+			if next:
+				redirect = next
+
+			self.redirect(str(redirect))
 		else:
 			# Display the form again
 			values = {

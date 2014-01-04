@@ -26,7 +26,13 @@
 			<div class="idea">
 				<a href="/{{ user.username }}" class="author-pic" style="background-image:url('/{{ user.username }}/image')"></a>
 				<h3>
-					<a href="{% if current_user %}/idea/{{ idea.key.id }}{% else %}/auth/signin{% endif%}">
+					<a href="
+							{% if current_user %}
+								/idea/{{ idea.key.id }}
+							{% else %}
+								/auth/signin?next={{ site_url }}/idea/{{ idea.key.id }}
+							{% endif%}"
+					>
 						{{ idea.title }}
 					</a>
 				</h3>
