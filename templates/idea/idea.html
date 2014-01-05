@@ -6,15 +6,11 @@
 {% endblock %}
 
 {% block options %}
-	{% if current_user.key.id == author.key.id or admin %}
-	<a href="/idea/{{ extended_idea.id }}/edit" class="btn btn-default">Edit</a>
-	{% else %}
-		{% if feedback %}
-		<form role="form" method="post" action="/feedback/{{ feedback.key.name }}/delete" class="delete">
-			You're {% if feedback.content == "positive" %}enthusiastic{% else %}skeptical{% endif %}
-			<input type="submit" value="Cancel" class="btn btn-default" />
-		</form>
-		{% endif %}
+	{% if feedback %}
+	<form role="form" method="post" action="/feedback/{{ feedback.key.name }}/delete" class="delete">
+		You're {% if feedback.content == "positive" %}enthusiastic{% else %}skeptical{% endif %}
+		<input type="submit" value="Cancel" class="btn btn-default" />
+	</form>
 	{% endif %}
 {% endblock %}
 
@@ -22,7 +18,7 @@
 <div id="idea">
 	<h2>{{ extended_idea.title }}</h2>
 	<small>
-		<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"> <a href="/{{ author.username }}">@{{ author.username }}</a> | {{ extended_idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ extended_idea.positive }} | Skeptics: {{ extended_idea.negative }}
+		<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"> <a href="/{{ author.username }}">@{{ author.username }}</a> | {{ extended_idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ extended_idea.positive }} | Skeptics: {{ extended_idea.negative }}{% if current_user.key.id == author.key.id or admin %} | <a href="/idea/{{ extended_idea.id }}/edit">Edit</a>{% endif %}
 	</small>
 	{% for extended_step in extended_idea.extended_steps %}
 	<h3>{{ extended_step.title }}</h3>
