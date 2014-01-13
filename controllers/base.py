@@ -66,6 +66,8 @@ class BaseHandler(webapp2.RequestHandler):
 			"site_url": config.SITE_URL,
 			"domain": config.DOMAIN,
 			"google_analytics_id": config.GOOGLE_ANALYTICS_ID,
+			"cio_site_id": config.CIO_SITE_ID,
+			"cio_api_key": config.CIO_API_KEY,
 		})
 		
 		add_to_builtins('ext.templatetags.custom')

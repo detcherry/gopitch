@@ -1,4 +1,5 @@
 import logging
+import json
 
 from error import GetpitchdError
 
@@ -8,6 +9,7 @@ from controllers.base import login_required
 from models.comment import Comment
 from models.user import User
 from models.idea import Idea
+from models.event import CommentReplyEvent
 
 class CommentReplyHandler(BaseHandler):
 	@login_required
@@ -49,6 +51,9 @@ class CommentReplyHandler(BaseHandler):
 				reply.put()
 				idea.comments += 1
 				idea.put()
+				
+				event = CommentReplyEvent(self.current_user, reply, comment)
+				event.send()
 				
 				values = {
 					"response" : "Reply sent",

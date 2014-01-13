@@ -19,6 +19,7 @@ from controllers.user.image import UserImageHandler
 from controllers.user.tweet import UserTweetHandler
 from controllers.admin.update import AdminUpdateHandler
 from controllers.queue.update import QueueUpdateHandler
+from controllers.queue.event import QueueEventHandler
 
 config = {}
 config["webapp2_extras.sessions"] = {
@@ -45,6 +46,7 @@ app = webapp2.WSGIApplication(
 		("/user/tweet", UserTweetHandler),
 		("/admin/update", AdminUpdateHandler),
 		("/queue/update", QueueUpdateHandler),
+		("/queue/event", QueueEventHandler),
 		("/.*", HomeHandler),
 	],
 	config = config,

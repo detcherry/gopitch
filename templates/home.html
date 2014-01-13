@@ -6,7 +6,6 @@
 		<div class="description">
 			The best place for developers, marketers, designers to pitch or get pitched new startup ideas.
 		</div>
-
 		<div class="misc">
 			{% if current_user %}
 			<a href="{{ current_user.username }}">@{{ current_user.username }}</a> | <a href="/auth/signout">Sign out</a>
@@ -23,7 +22,7 @@
 
 {% block right %}
 	<div class="feed-header">
-		<h2>Most recent</h2>{% if feed %}<a class="btn btn-default" href="{% if current_user %}/idea/pitch{% else %}/auth/signin{% endif %}">Pitch a new idea</a>{% endif %}
+		<h2>Most recent</h2><a class="btn btn-default" href="{% if current_user %}/idea/pitch{% else %}/auth/signin?next={{ site_url }}/idea/pitch{% endif %}">Pitch a new idea</a>
 	</div>
 	<div class="feed">
 		{% if feed %}
@@ -47,8 +46,7 @@
 			{% endfor %}
 		{% else %}
 		<div class="empty">
-			No startup idea has been pitched so far.<br/>
-			<a href="/idea/pitch" class="btn btn-default">Pitch a new idea</a>
+			No startup idea has been pitched so far.
 		</div>
 		{% endif %}
 	</div>

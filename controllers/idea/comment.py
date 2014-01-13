@@ -1,4 +1,5 @@
 import logging
+import json
 
 from google.appengine.ext import db
 
@@ -7,6 +8,7 @@ from controllers.base import BaseHandler
 from controllers.base import login_required
 from models.idea import Idea
 from models.comment import Comment
+from models.event import IdeaCommentEvent
 
 class IdeaCommentHandler(BaseHandler):
 	@login_required
@@ -26,6 +28,9 @@ class IdeaCommentHandler(BaseHandler):
 				comment.put()
 				idea.comments += 1
 				idea.put()
+				
+				event = IdeaCommentEvent(self.current_user, comment, idea)
+				event.send()
 
 				values = {
 					"response": "Comment posted",
@@ -36,7 +41,6 @@ class IdeaCommentHandler(BaseHandler):
 				}
 				path = "feedback.html"
 				self.render(path, values)
-				
 			else:
 				raise GetpitchdError("Comment text is empty")
 
