@@ -23,7 +23,6 @@ class AuthSigninHandler(BaseHandler):
 			authorization_url = handler.get_authorization_url(True)
 		except tweepy.TweepError: 
 			logging.error("Could not retrieve Twitter authorization URL")
-			print "Error"
 		
 		# Save the Twitter request key and secret in the session
 		self.session["request_token_key"] = handler.request_token.key
@@ -50,7 +49,7 @@ class AuthCallbackHandler(BaseHandler):
 				
 				if((not user) or (user and user.updated < datetime.now() - timedelta(0,86400))):
 					logging.info("Connecting to the Twitter API")
-					api = API(handler, secure=False)
+					api = API(handler)
 					temp_user = api.verify_credentials()
 					temp_image = urlfetch.Fetch(str(temp_user.profile_image_url).replace("_normal", "")).content
 					
