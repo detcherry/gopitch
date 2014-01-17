@@ -22,7 +22,7 @@
 
 {% block right %}
 	<div class="feed-header">
-		<h2>Most recent</h2><a class="btn btn-default" href="{% if current_user %}/idea/pitch{% else %}/auth/signin?next={{ site_url }}/idea/pitch{% endif %}">Pitch a new idea</a>
+		<h2>Most recent</h2><a class="btn btn-default" href="/idea/pitch">Pitch a new idea</a>
 	</div>
 	<div class="feed">
 		{% if feed %}

@@ -23,7 +23,7 @@ def login_required(method):
 		user = self.current_user
 		if not user:
 			if self.request.method == "GET":
-				self.redirect("/")
+				self.redirect("/auth/signin?next="+self.request.url)
 				return
 			self.error(403)
 		else:
