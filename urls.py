@@ -24,7 +24,7 @@ from controllers.queue.event import QueueEventHandler
 
 config = {}
 config["webapp2_extras.sessions"] = {
-	"secret_key": "getp1tchd!",
+	"secret_key": "gopitch",
 }
 
 app = webapp2.WSGIApplication(
