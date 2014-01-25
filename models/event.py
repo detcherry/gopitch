@@ -30,27 +30,29 @@ class IdeaCommentEvent(Event):
 		author_key = Idea.author.get_value_for_datastore(idea)
 		author = User.get(author_key)
 		
-		self._data = {
-			"user": {
-				"id": user.key().id(),
-			},
-			"comment":{
-				"id": comment.key().id(),
-				"text": comment.text,
-			},
-			"idea": {
-				"id": idea.key().id(),
-				"title": idea.title,
-				"author": {
-					"username": author.username,
-					"name": author.name,
-					"email": author.email,
+		if(author.email_idea_comment):
+			self._data = {
+				"user": {
+					"id": user.key().id(),
 				},
-				"positive": idea.positive,
-				"negative": idea.negative,
-				"comments": idea.comments,
+				"comment":{
+					"id": comment.key().id(),
+					"text": comment.text,
+				},
+				"idea": {
+					"id": idea.key().id(),
+					"title": idea.title,
+					"author": {
+						"username": author.username,
+						"name": author.name,
+						"email": author.email,
+					},
+					"positive": idea.positive,
+					"negative": idea.negative,
+					"comments": idea.comments,
+				}
 			}
-		}
+			self.send()
 
 class CommentReplyEvent(Event):
 	def __init__(self, user, reply, comment):
@@ -59,23 +61,25 @@ class CommentReplyEvent(Event):
 		author_key = Comment.author.get_value_for_datastore(comment)
 		author = User.get(author_key)
 		
-		self._data = {
-			"user": {
-				"id": user.key().id(),
-			},
-			"reply":{
-				"id": reply.key().id(),
-				"text": reply.text,
-			},
-			"comment": {
-				"id": comment.key().id(),
-				"author": {
-					"username": author.username,
-					"name": author.name,
-					"email": author.email,
-				}
-			},
-		}
+		if(author.email_comment_reply):
+			self._data = {
+				"user": {
+					"id": user.key().id(),
+				},
+				"reply":{
+					"id": reply.key().id(),
+					"text": reply.text,
+				},
+				"comment": {
+					"id": comment.key().id(),
+					"author": {
+						"username": author.username,
+						"name": author.name,
+						"email": author.email,
+					}
+				},
+			}
+			self.send()
 
 class IdeaFeedbackEvent(Event):
 	def __init__(self, user, feedback, idea, comment=None):
@@ -84,25 +88,27 @@ class IdeaFeedbackEvent(Event):
 		author_key = Idea.author.get_value_for_datastore(idea)
 		author = User.get(author_key)
 		
-		self._data = {
-			"user": {
-				"id": user.key().id(),
-			},
-			"feedback": {
-				"id": feedback.key().id(),
-				"content": feedback.content,
-				"comment": comment,
-			},
-			"idea":{
-				"id": idea.key().id(),
-				"title": idea.title,
-				"author": {
-					"username": author.username,
-					"name": author.name,
-					"email": author.email,
+		if(author.email_idea_feedback):
+			self._data = {
+				"user": {
+					"id": user.key().id(),
 				},
-				"positive": idea.positive,
-				"negative": idea.negative,
-				"comments": idea.comments,
+				"feedback": {
+					"id": feedback.key().id(),
+					"content": feedback.content,
+					"comment": comment,
+				},
+				"idea":{
+					"id": idea.key().id(),
+					"title": idea.title,
+					"author": {
+						"username": author.username,
+						"name": author.name,
+						"email": author.email,
+					},
+					"positive": idea.positive,
+					"negative": idea.negative,
+					"comments": idea.comments,
+				}
 			}
-		}
+			self.send()

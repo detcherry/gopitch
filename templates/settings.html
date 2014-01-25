@@ -1,0 +1,28 @@
+{% extends "narrow.html" %}
+
+{% block narrow %}
+<div id="settings">
+	<h2>Settings</h2>
+	<form role="form" method="post" action="/user/settings">
+		<h3>Email me when...</h3>
+		<div class="form-group">
+			<label for="idea-comment">
+				<input type="checkbox" {% if current_user.email_idea_comment %}checked="checked"{% endif %} name="idea-comment">Someone comments on my ideas
+			</label>
+		</div>
+		<div class="form-group">
+			<label for="idea-feedback">
+				<input type="checkbox" {% if current_user.email_idea_feedback %}checked="checked"{% endif %} name="idea-feedback">Someone sends some feedback about my ideas
+			</label>
+		</div>
+		<div class="form-group">
+			<label for="comment-reply">
+				<input type="checkbox" {% if current_user.email_comment_reply %}checked="checked"{% endif %} name="comment-reply">Someone replies to my comments
+			</label>
+		</div>
+		<div class="form-group">
+			<input type="submit" value="Update" class="btn btn-primary">
+		</div>
+	</form>
+</div>
+{% endblock %}

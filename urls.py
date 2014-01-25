@@ -17,6 +17,7 @@ from controllers.feedback.delete import FeedbackDeleteHandler
 from controllers.user.user import UserHandler
 from controllers.user.image import UserImageHandler
 from controllers.user.tweet import UserTweetHandler
+from controllers.user.settings import UserSettingsHandler
 from controllers.admin.update import AdminUpdateHandler
 from controllers.queue.update import QueueUpdateHandler
 from controllers.queue.event import QueueEventHandler
@@ -44,6 +45,7 @@ app = webapp2.WSGIApplication(
 		("/(\w+)", UserHandler),
 		("/(\w+)/image", UserImageHandler),
 		("/user/tweet", UserTweetHandler),
+		("/user/settings", UserSettingsHandler),
 		("/admin/update", AdminUpdateHandler),
 		("/queue/update", QueueUpdateHandler),
 		("/queue/event", QueueEventHandler),

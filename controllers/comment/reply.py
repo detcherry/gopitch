@@ -53,7 +53,6 @@ class CommentReplyHandler(BaseHandler):
 				idea.put()
 				
 				event = CommentReplyEvent(self.current_user, reply, comment)
-				event.send()
 				
 				values = {
 					"response" : "Reply sent",

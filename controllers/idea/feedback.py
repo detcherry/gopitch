@@ -58,7 +58,6 @@ class IdeaFeedbackHandler(BaseHandler):
 						event = IdeaFeedbackEvent(self.current_user, feedback, idea, text)
 					else:
 						event = IdeaFeedbackEvent(self.current_user, feedback, idea)
-					event.send()
 					
 					if(content == "positive"):
 						author_key = Idea.author.get_value_for_datastore(idea)

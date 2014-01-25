@@ -12,7 +12,7 @@
 		<div class="description">
 			{{ user.bio }}
 		</div>
-		<div class="misc">Ideas: {{ user.ideas }}</div>
+		<div class="misc">Ideas: {{ user.ideas }} {% if current_user.key.id == user.key.id %}| <a href="/user/settings">Settings</a>{% endif %}</div>
 	</div>
 {% endblock %}
 

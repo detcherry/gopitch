@@ -14,6 +14,9 @@ class User(db.Model):
 	ideas = db.IntegerProperty(required=True, default=0)
 	email = db.StringProperty(required=False)
 	country = db.StringProperty(required=False)
+	email_idea_comment = db.BooleanProperty(required=True, default=True)
+	email_idea_feedback = db.BooleanProperty(required=True, default=True)
+	email_comment_reply = db.BooleanProperty(required=True, default=True)
 	created = db.DateTimeProperty(auto_now_add=True)
 	updated = db.DateTimeProperty(auto_now=True)
 	

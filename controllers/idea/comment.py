@@ -30,7 +30,6 @@ class IdeaCommentHandler(BaseHandler):
 				idea.put()
 				
 				event = IdeaCommentEvent(self.current_user, comment, idea)
-				event.send()
 
 				values = {
 					"response": "Comment posted",
