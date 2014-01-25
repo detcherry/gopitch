@@ -113,8 +113,9 @@ body{
 
 h1.logo{
 	padding:10px 14px;
-	width:156px;
+	width:130px;
 	text-transform:uppercase;
+	text-align:center;
 	font-weight:bold;
 	font-style:italic;
 	font-size:22px;
