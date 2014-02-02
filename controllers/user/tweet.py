@@ -1,6 +1,7 @@
 import logging
 
 from tweepy import auth
+from tweepy import TweepError
 from tweepy.api import API
 
 from controllers import config
@@ -17,12 +18,12 @@ class UserTweetHandler(BaseHandler):
 		else:
 			handler = auth.OAuthHandler(config.CONSUMER_KEY, config.CONSUMER_SECRET)
 			handler.set_access_token(self.current_user.twitter_access_token_key, self.current_user.twitter_access_token_secret)
-			api = API(handler, secure=False)
+			api = API(handler)
 			
 			try:
 				api.update_status(tweet)
 				response = "Tweet successfully sent"
-			except tweepy.TweepError:
+			except TweepError:
 				logging.error("Could not send tweet.")
 				response = "Could not send your tweet. Please try again later."
 			

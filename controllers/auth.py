@@ -1,10 +1,10 @@
 import logging
 import re
-import tweepy
 from datetime import datetime
 from datetime import timedelta
 
 from tweepy import auth
+from tweepy import TweepError
 from tweepy.api import API
 
 from google.appengine.ext import db
@@ -21,7 +21,7 @@ class AuthSigninHandler(BaseHandler):
 		
 		try:
 			authorization_url = handler.get_authorization_url(True)
-		except tweepy.TweepError: 
+		except TweepError: 
 			logging.error("Could not retrieve Twitter authorization URL")
 		
 		# Save the Twitter request key and secret in the session
