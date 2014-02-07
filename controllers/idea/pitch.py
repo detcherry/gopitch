@@ -39,7 +39,7 @@ class IdeaPitchHandler(BaseHandler):
 			user.ideas += 1
 			user.put()
 			
-			text = "I just pitched a new startup idea on @getpitchd: " + idea.title
+			text = "I just pitched a new startup idea on @gopitchme: " + idea.title
 			url = config.SITE_URL + "/idea/" + str(idea.key().id())
 			tweet = generate_tweet(text, url)
 			

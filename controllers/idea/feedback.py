@@ -63,7 +63,7 @@ class IdeaFeedbackHandler(BaseHandler):
 						author_key = Idea.author.get_value_for_datastore(idea)
 						author = User.get(author_key)
 						
-						text = "I'm enthusiastic about a new startup idea pitched by @" + author.username + " on @getpitchd: " + idea.title
+						text = "I'm enthusiastic about a new startup idea pitched by @" + author.username + " on @gopitchme: " + idea.title
 						url = config.SITE_URL + "/idea/" + str(idea.key().id())
 						tweet = generate_tweet(text, url)
 						
