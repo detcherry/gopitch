@@ -1,5 +1,5 @@
-import logging
 import re
+import logging
 from datetime import datetime
 from datetime import timedelta
 
@@ -7,8 +7,12 @@ from tweepy import auth
 from tweepy import TweepError
 from tweepy.api import API
 
+import cloudstorage as gcs
+
 from google.appengine.ext import db
 from google.appengine.api import urlfetch
+from google.appengine.api import blobstore
+from google.appengine.api import images
 
 from controllers import config
 from controllers.base import BaseHandler
@@ -52,7 +56,13 @@ class AuthCallbackHandler(BaseHandler):
 					api = API(handler)
 					temp_user = api.verify_credentials()
 					temp_image = urlfetch.Fetch(str(temp_user.profile_image_url).replace("_normal", "")).content
-					
+
+					# Save or update image in Cloud storage file
+					filename = config.FOLDER + "/" + str(temp_user.id)
+					gcs_file = gcs.open(filename,'w',content_type="image",options={"x-goog-acl":"public-read"})
+					gcs_file.write(temp_image)
+					gcs_file.close()
+								
 					if not user:
 						logging.info("User did not exist")
 	
@@ -62,17 +72,16 @@ class AuthCallbackHandler(BaseHandler):
 							twitter_access_token_secret = str(access_token.secret),
 							username = str(temp_user.screen_name).lower(),
 							name = temp_user.name,
-							image = db.Blob(temp_image),
 							bio = temp_user.description,
 						)
 					else:
 						logging.info("User had to be updated")
+
 						user.twitter_id = str(temp_user.id)
 						user.twitter_access_token_key = str(access_token.key)
 						user.twitter_access_token_secret = str(access_token.secret)
 						user.username = str(temp_user.screen_name).lower()
 						user.name = temp_user.name
-						user.image = db.Blob(temp_image)
 						user.bio = temp_user.description
 					
 					user.put()

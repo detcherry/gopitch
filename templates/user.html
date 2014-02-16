@@ -24,7 +24,7 @@
 		{% if ideas %}
 			{% for idea in ideas %}
 			<div class="idea">
-				<a href="/{{ user.username }}" class="author-pic" style="background-image:url('/{{ user.username }}/image')"></a>
+				<a href="/{{ user.username }}" class="author-pic" style="background-image:url('{{ img_url }}/{{ user.twitter_id }}')"></a>
 				<h3>
 					<a href="
 							{% if current_user %}

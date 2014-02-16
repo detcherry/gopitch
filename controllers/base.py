@@ -64,6 +64,7 @@ class BaseHandler(webapp2.RequestHandler):
 			"env": config.ENV,
 			"version": config.VERSION,
 			"site_url": config.SITE_URL,
+			"img_url": config.IMG_URL,
 			"domain": config.DOMAIN,
 			"google_analytics_id": config.GOOGLE_ANALYTICS_ID,
 			"cio_site_id": config.CIO_SITE_ID,

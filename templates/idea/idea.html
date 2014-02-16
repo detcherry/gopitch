@@ -18,7 +18,7 @@
 <div id="idea">
 	<h2>{{ extended_idea.title }}</h2>
 	<small>
-		<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"> <a href="/{{ author.username }}">@{{ author.username }}</a> | {{ extended_idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ extended_idea.positive }} | Skeptics: {{ extended_idea.negative }}{% if current_user.key.id == author.key.id or admin %} | <a href="/idea/{{ extended_idea.id }}/edit">Edit</a>{% endif %}
+		<a href="/{{ author.username }}" class="author-pic" style="background-image:url('{{ img_url }}/{{ author.twitter_id }}')"> <a href="/{{ author.username }}">@{{ author.username }}</a> | {{ extended_idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ extended_idea.positive }} | Skeptics: {{ extended_idea.negative }}{% if current_user.key.id == author.key.id or admin %} | <a href="/idea/{{ extended_idea.id }}/edit">Edit</a>{% endif %}
 	</small>
 	{% for extended_step in extended_idea.extended_steps %}
 	<h3>{{ extended_step.title }}</h3>
@@ -67,7 +67,7 @@
 	{% if comments %}
 		{% for a, c, d in comments %}
 		<div class="comment" style="padding-left:{{ d|double }}em">
-			<small><a href="/{{ a.username }}" class="author-pic" style="background-image:url('/{{ a.username }}/image')"></a> <a href="/{{ a.username }}">@{{ a.username }}</a> | {{ c.created|timesince|upto:',' }} ago</small>
+			<small><a href="/{{ a.username }}" class="author-pic" style="background-image:url('{{ img_url }}/{{ a.twitter_id }}')"></a> <a href="/{{ a.username }}">@{{ a.username }}</a> | {{ c.created|timesince|upto:',' }} ago</small>
 			<div class="comment-text">
 			{{ c.text|linebreaksbr }}
 			</div>

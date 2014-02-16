@@ -3,13 +3,12 @@
 
 from google.appengine.ext import db
 
-class User(db.Model):
+class User(db.Expando):
 	twitter_id = db.StringProperty(required=True)
 	twitter_access_token_key = db.StringProperty(required=True)
 	twitter_access_token_secret = db.StringProperty(required=True)
 	username = db.StringProperty(required=True)
 	name = db.StringProperty(required=True)
-	image = db.BlobProperty(required=True)
 	bio = db.TextProperty(required=False)
 	ideas = db.IntegerProperty(required=True, default=0)
 	email = db.StringProperty(required=False)

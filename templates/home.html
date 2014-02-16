@@ -28,7 +28,7 @@
 		{% if feed %}
 			{% for idea, author in feed %}
 			<div class="idea">
-				<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"></a>
+				<a href="/{{ author.username }}" class="author-pic" style="background-image:url('{{ img_url }}/{{ author.twitter_id }}')"></a>
 				<h3>
 					<a href="{% if current_user %}
 								/idea/{{ idea.key.id }}

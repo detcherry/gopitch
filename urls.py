@@ -15,7 +15,6 @@ from controllers.comment.reply import CommentReplyHandler
 from controllers.comment.delete import CommentDeleteHandler
 from controllers.feedback.delete import FeedbackDeleteHandler
 from controllers.user.user import UserHandler
-from controllers.user.image import UserImageHandler
 from controllers.user.tweet import UserTweetHandler
 from controllers.user.settings import UserSettingsHandler
 from controllers.admin.update import AdminUpdateHandler
@@ -43,7 +42,6 @@ app = webapp2.WSGIApplication(
 		("/comment/([0-9]+)/delete", CommentDeleteHandler),
 		("/feedback/([0-9_]+)/delete", FeedbackDeleteHandler),
 		("/(\w+)", UserHandler),
-		("/(\w+)/image", UserImageHandler),
 		("/user/tweet", UserTweetHandler),
 		("/user/settings", UserSettingsHandler),
 		("/admin/update", AdminUpdateHandler),
