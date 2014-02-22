@@ -3,7 +3,7 @@
 {% block narrow %}
 <div id="reply">
 	<small>
-		<a href="/{{ author.username }}" class="author-pic" style="background-image:url('/{{ author.username }}/image')"></a> <a href="/{{ author.username }}">@{{ author.username }}</a> | {{ comment.created|timesince|upto:',' }} ago
+		<a href="/{{ author.username }}" class="author-pic" style="background-image:url('{{ img_url }}/{{ author.twitter_id }}')"></a> <a href="/{{ author.username }}">@{{ author.username }}</a> | {{ comment.created|timesince|upto:',' }} ago
 	</small>
 	<div class="comment-text">{{ comment.text }}</div>
 	<form role="form" method="post" action="/comment/{{ comment.key.id }}/reply">
