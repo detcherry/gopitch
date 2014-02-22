@@ -25,37 +25,7 @@ class Idea(db.Model):
 	def get_steps(version):
 		steps = []
 		
-		if(version == "0"):
-			steps = [{
-				"slug": "problem",
-				"title": "Problem",
-				"question": "What problem are you trying to solve? Who has it?",
-			},{
-				"slug": "solution",
-				"title": "Solution",
-				"question": "What are you going to build?",
-			},{
-				"slug": "opportunity",
-				"title": "Opportunity",
-				"question": "What's new about what you're building? What are people forced to do because you don't exist?",
-			},{
-				"slug": "competitors",
-				"title": "Competitors",
-				"question": "Who are your competitors?",
-			},{
-				"slug": "business_model",
-				"title": "Business Model",
-				"question": "How are you going to make money?",
-			},{
-				"slug": "acquisition",
-				"title": "Acquisition",
-				"question": "How will you attract potential users/customers?",
-			},{
-				"slug": "milestones",
-				"title": "Milestones",
-				"question": "Are you posting this idea for fun? To find a cofounder? Get Feedback? Please, tell where you are.",
-			}]
-		elif(version == "1"):
+		if(version == "1"):
 			steps = [{
 				"slug": "problem",
 				"title": "Problem",
@@ -67,7 +37,7 @@ class Idea(db.Model):
 			},{
 				"slug": "acquisition",
 				"title": "Acquisition",
-				"question": "How will you attract potential users/customers?",
+				"question": "How will you to attract potential users/customers?",
 			},{
 				"slug": "business_model",
 				"title": "Business Model",
@@ -75,7 +45,7 @@ class Idea(db.Model):
 			},{
 				"slug": "competitors",
 				"title": "Competitors",
-				"question": "Who are your competitors?",
+				"question": "Who will you compete with?",
 			},{
 				"slug": "milestones",
 				"title": "Milestones",

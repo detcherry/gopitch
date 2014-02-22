@@ -12,5 +12,5 @@ class AdminUpdateHandler(BaseHandler):
 	
 	@admin_required
 	def post(self):
-		task = Task(url = "/queue/update", countdown=10)
+		task = Task(url = "/queue/update", countdown=5)
 		task.add(queue_name="update-queue")		

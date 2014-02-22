@@ -16,12 +16,13 @@ from controllers import config
 from controllers.base import BaseHandler
 
 from models.user import User
+from models.idea import Idea
 
 class QueueUpdateHandler(BaseHandler):
 	def post(self):
 		cursor = self.request.get("cursor")
 		
-		q = User.all()
+		q = Idea.all()
 		q.order("created")
 		
 		# Is there a cursor?
@@ -31,9 +32,34 @@ class QueueUpdateHandler(BaseHandler):
 		else:
 			logging.info("No cursor")
 
-		batch_size = 1
-		users = q.fetch(batch_size)
-		
+
+		"""
+		batch_size = 5
+		ideas = q.fetch(batch_size)
+		new_ideas = []
+
+		for idea in ideas:
+			problem = idea.answers[0]
+			solution = idea.answers[1]
+			competitors = idea.answers[3]
+			business_model = idea.answers[4]
+			acquisition = idea.answers[5]
+			milestones = idea.answers[6]
+			
+			new_answers = [
+				problem,
+				solution,
+				acquisition,
+				business_model,
+				competitors,
+				milestones,
+			]
+			idea.answers = new_answers
+			idea.version = "1"
+			new_ideas.append(idea)
+
+		db.put(new_ideas)
+
 		for user in users:
 			try:
 				del user.image
@@ -47,7 +73,8 @@ class QueueUpdateHandler(BaseHandler):
 
 		db.put(users)
 		
-		"""
+		##########
+
 		if(len(users)>0):
 			user = users[0]
 
@@ -59,14 +86,14 @@ class QueueUpdateHandler(BaseHandler):
 			gcs_file.close()
 		"""
 
-		if(len(users)==batch_size):
+		if(len(ideas)==batch_size):
 			new_cursor = q.cursor()
 			task = Task(
 				url = "/queue/update",
 				params = {
 					'cursor': new_cursor,
 				},
-				countdown = 5,
+				countdown = 2,
 			)
 			task.add(queue_name="update-queue")
 			
