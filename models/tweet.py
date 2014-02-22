@@ -6,7 +6,7 @@ def generate_tweet(text, url):
 	if len(tweet) < characters_left:
 		tweet = tweet + " "
 	else:
-		tweet = tweet[characters_left-3] + "..." + " "
+		tweet = tweet[:characters_left-3] + "..." + " "
 	
 	tweet += url
 	
