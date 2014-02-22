@@ -19,7 +19,7 @@ class Idea(db.Model):
 
 	@staticmethod
 	def get_current_version():
-		return "0"
+		return "1"
 
 	@staticmethod
 	def get_steps(version):
@@ -55,6 +55,32 @@ class Idea(db.Model):
 				"title": "Milestones",
 				"question": "Are you posting this idea for fun? To find a cofounder? Get Feedback? Please, tell where you are.",
 			}]
+		elif(version == "1"):
+			steps = [{
+				"slug": "problem",
+				"title": "Problem",
+				"question": "What problem are you trying to solve? Who has it?",
+			},{
+				"slug": "solution",
+				"title": "Solution",
+				"question": "What are you going to build?",
+			},{
+				"slug": "acquisition",
+				"title": "Acquisition",
+				"question": "How will you attract potential users/customers?",
+			},{
+				"slug": "business_model",
+				"title": "Business Model",
+				"question": "How are you going to make money?",
+			},{
+				"slug": "competitors",
+				"title": "Competitors",
+				"question": "Who are your competitors?",
+			},{
+				"slug": "milestones",
+				"title": "Milestones",
+				"question": "Are you posting this idea for fun? To find a cofounder? Get Feedback? Please, tell where you are.",
+			}]			
 		else:
 			logging.error("Idea version does not exist...")
 		
