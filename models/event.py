@@ -12,6 +12,7 @@ class Event():
 	def send(self):
 		self._data.update({
 			"site_url": config.SITE_URL,
+			"img_url": config.IMG_URL,
 		})
 		
 		task = Task(
