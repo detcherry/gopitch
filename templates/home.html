@@ -44,9 +44,12 @@
 				</small>
 			</div>
 			{% endfor %}
+			{% if offset %}
+			<a href="/?offset={{offset}}" class="offset">More ideas</a>
+			{% endif %}
 		{% else %}
 		<div class="empty">
-			No startup idea has been pitched so far.
+			No startup idea has been pitched here so far.
 		</div>
 		{% endif %}
 	</div>

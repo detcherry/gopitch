@@ -35,6 +35,11 @@ body{
 	font-family: 'Merriweather', "Georgia", serif;
 	font-size:18px;
 	font-weight:300;
+	color:rgb(51,51,51);
+}
+
+a, a:focus, a:active, a:hover{
+	color:rgb(51,51,51);
 }
 
 .navbar-default{
@@ -378,7 +383,8 @@ small, small a, small a:hover{
 
 /*--- HOME ---*/
 
-.feed .empty a.btn{
+.feed a.offset{
+	display:block;
 	margin-top:15px;
 }
 
