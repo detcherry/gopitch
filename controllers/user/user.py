@@ -22,7 +22,7 @@ class UserHandler(BaseHandler):
 			else:
 				offset = datetime.utcnow()
 
-			size = 2;
+			size = 50;
 			q = Idea.all()
 			q.filter("author = ", user.key())
 			q.filter("created <", offset)
