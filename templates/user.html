@@ -37,10 +37,13 @@
 					</a>
 				</h3>
 				<small>
-					<a href="{{ user.username }}">@{{ user.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}
+					<a href="/{{ user.username }}">@{{ user.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}
 				</small>
 			</div>
 			{% endfor %}
+			{% if offset %}
+			<a href="/{{user.username}}?offset={{offset}}" class="offset">More ideas</a>
+			{% endif %}
 		{% else %}
 			<div class="empty">No idea pitched so far.</div>
 		{% endif %}
