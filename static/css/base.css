@@ -167,6 +167,10 @@ small, small a, small a:hover{
 	margin-top:20px;
 }
 
+.options input{
+	margin-left:5px;
+}
+
 .narrow{
 	margin:auto;
 	width:550px;
@@ -305,7 +309,6 @@ small, small a, small a:hover{
 }
 
 .right{
-	float:left;
 	margin-left:300px;
 	padding-top:50px;
 	padding-bottom:50px;
@@ -316,7 +319,7 @@ small, small a, small a:hover{
 .feed-header{
 	float:left;
 	width:100%;
-	margin-bottom:20px;
+	margin-bottom:30px;
 	padding-bottom:15px;
 	border-bottom:1px solid #dededc;
 }
@@ -334,9 +337,8 @@ small, small a, small a:hover{
 }
 
 .feed .idea{
-	float:left;
 	width:100%;
-	padding:15px 0px;
+	padding:20px 0px;
 }
 
 .feed .idea a.author-pic{
