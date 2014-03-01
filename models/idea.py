@@ -1,5 +1,8 @@
 import logging
 
+from datetime import datetime
+from calendar import timegm
+
 from google.appengine.ext import db
 
 from models.user import User
@@ -117,6 +120,41 @@ class Idea(db.Model):
 					break
 		
 		return validated, title, answers
+
+	@staticmethod
+	def get_last_ideas(user=None, country=None, offset=None):
+		if offset:
+			offset_timestamp = datetime.utcfromtimestamp(int(offset))
+
+		size=50
+		q = Idea.all()
+
+		if(user):
+			q.filter("author = ", user.key())
+
+		if(country):
+			q.filter("country = ", country)
+
+		if offset:
+			q.filter("created <", datetime.utcfromtimestamp(int(offset)))
+
+		q.order("-created")
+
+		ideas = q.fetch(size+1)
+
+		new_offset = None
+		if(len(ideas)==size+1):
+			last_idea = ideas[len(ideas)-2]
+			new_offset = timegm(last_idea.created.utctimetuple())
+			del ideas[-1]
+
+		return ideas, new_offset
+
+
+
+
+
+
 				
 		
 		

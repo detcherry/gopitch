@@ -1,0 +1,29 @@
+<div class="feed">
+	{% if feed %}
+		{% for idea, author in feed %}
+		<div class="idea">
+			<a href="/{{ author.username }}" class="author-pic" style="background-image:url('{{ img_url }}/{{ author.twitter_id }}')"></a>
+			<h3>
+				<a href="{% if current_user %}
+							/idea/{{ idea.key.id }}
+						{% else %}
+							/auth/signin?next={{ site_url }}/idea/{{ idea.key.id }}
+						{% endif %}"
+				>
+					{{ idea.title }}
+				</a>
+			</h3>
+			<small>
+				<a href="/{{ author.username }}">@{{ author.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}
+			</small>
+		</div>
+		{% endfor %}
+		{% if more_ideas_url %}
+		<a href="{{more_ideas_url}}" class="offset">More ideas</a>
+		{% endif %}
+	{% else %}
+	<div class="empty">
+		No startup idea pitched here so far.
+	</div>
+	{% endif %}
+</div>

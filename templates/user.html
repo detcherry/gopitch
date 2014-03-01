@@ -20,32 +20,5 @@
 	<div class="feed-header">
 		<h2>Most recent</h2>
 	</div>
-	<div class="feed">
-		{% if ideas %}
-			{% for idea in ideas %}
-			<div class="idea">
-				<a href="/{{ user.username }}" class="author-pic" style="background-image:url('{{ img_url }}/{{ user.twitter_id }}')"></a>
-				<h3>
-					<a href="
-							{% if current_user %}
-								/idea/{{ idea.key.id }}
-							{% else %}
-								/auth/signin?next={{ site_url }}/idea/{{ idea.key.id }}
-							{% endif%}"
-					>
-						{{ idea.title }}
-					</a>
-				</h3>
-				<small>
-					<a href="/{{ user.username }}">@{{ user.username }}</a> | {{ idea.created|timesince|upto:',' }} ago | Enthusiasts: {{ idea.positive }} | Skeptics: {{ idea.negative }} | Comments: {{ idea.comments }}
-				</small>
-			</div>
-			{% endfor %}
-			{% if offset %}
-			<a href="/{{user.username}}?offset={{offset}}" class="offset">More ideas</a>
-			{% endif %}
-		{% else %}
-			<div class="empty">No idea pitched so far.</div>
-		{% endif %}
-	</div>
+	{% include "feed.html" %}
 {% endblock %}

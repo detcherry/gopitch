@@ -15,32 +15,20 @@ class UserHandler(BaseHandler):
 		user = User.all().filter("username =", str(username).lower()).get()
 		
 		if user:
-			values = {}
+			ideas, offset = Idea.get_last_ideas(user=user, offset=self.request.get("offset"))
 
-			if self.request.get("offset"):
-				offset = datetime.utcfromtimestamp(int(self.request.get("offset")))
-			else:
-				offset = datetime.utcnow()
+			authors = []
+			for idea in ideas:
+				authors.append(user)
 
-			size = 50;
-			q = Idea.all()
-			q.filter("author = ", user.key())
-			q.filter("created <", offset)
-			q.order("-created")
-			ideas = q.fetch(size+1)
-
-			new_offset = None
-			if(len(ideas)==size+1):
-				last_idea = ideas[len(ideas)-2]
-				new_offset = timegm(last_idea.created.utctimetuple())
-				values["offset"]=new_offset
-				del ideas[-1]
-
-			values.update({
+			values = {
+				"feed": zip(ideas, authors),
 				"user": user,
-				"ideas": ideas,
-			})
+			}
 
+			if offset:
+				values["more_ideas_url"] = "/"+user.username+"?offset="+str(offset)
+			
 			path = "user.html"
 			self.render(path, values)
 		else:
