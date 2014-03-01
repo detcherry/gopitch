@@ -133,7 +133,7 @@ class Idea(db.Model):
 			q.filter("author = ", user.key())
 
 		if(country):
-			q.filter("country = ", country)
+			q.filter("country = ", country.upper())
 
 		if offset:
 			q.filter("created <", datetime.utcfromtimestamp(int(offset)))

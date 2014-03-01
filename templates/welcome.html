@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block nav %}
+{% endblock %}
+
+{% block main %}
+<div id="welcome">
+	<div class="background"></div>
+	<h1 class="logo">
+		gopitch
+	</h1>
+	<p class="description">
+		The place where developers, marketers, designers<br/>
+		 go pitch their new startup ideas.
+	</p>
+	<p>
+		<a class="btn btn-default" href="/auth/signin">Sign in with Twitter</a>
+	</p>
+	<p class="feeds">
+		See ideas recently pitched in <a href="/c/fr">France</a>, <a href="/c/us">USA</a>, <a href="/c/de">Germany</a>, <a href="/c/gb">Great Britain</a>.
+	</p>
+	<small class="credits">
+		<a href="http://www.flickr.com/photos/leweb3/8969204693/in/set-72157633967789303" target="_blank">Photo credits: leweb</a>
+	</small>
+</div>
+{% endblock %}

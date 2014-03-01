@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import logging
+
 from google.appengine.ext import db
 
 class User(db.Expando):
@@ -274,3 +276,19 @@ class User(db.Expando):
 		]
 		
 		return countries
+
+	@staticmethod
+	def get_country_name(country):
+		name = None
+
+		countries = User.get_countries()
+		for c in countries:
+			if c["code"] == country.upper():
+				name=c["name"]
+				break
+
+		return name
+
+
+
+

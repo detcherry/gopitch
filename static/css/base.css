@@ -165,6 +165,64 @@ small, small a, small a:hover{
 	color:rgb(179,179,179);
 }
 
+/* --- WELCOME --- */
+
+#welcome .background{
+	position:fixed;
+	top:0px;
+	z-index:-1;
+	height:100%;
+	width:100%;
+	background: url(../images/background.jpg) no-repeat center center fixed; 
+	-webkit-background-size:cover;
+  	-moz-background-size:cover;
+  	-o-background-size:cover;
+  	background-size:cover;
+}
+
+#welcome{
+	color:white;
+	text-align:center;	
+}
+
+#welcome h1.logo{
+	margin-top:260px;
+	margin-bottom:20px;
+	padding:0px;
+	width:100%;
+	font-size:46px; /* moz */
+	font-size:7vw; /* webkit */
+	text-shadow:0px 0px 30px rgba(0, 0, 0, 1);
+	background:none;
+}
+
+#welcome p.description{
+	margin-bottom:30px;
+	line-height: 26px;
+	font-size: 16px;
+	text-shadow: 0em 0em 0.5em black;
+}
+
+#welcome a{
+	color:white;
+}
+
+#welcome a.btn{
+	border-color:white;
+}
+
+#welcome p.feeds{
+	margin-top:70px;
+	font-size:14px;
+}
+
+#welcome .credits{
+	position:fixed;
+	bottom:10px;
+	right:10px;
+	font-size:9px;
+}
+
 /* --- NARROW TEMPLATE ---*/
 
 .options{
@@ -330,11 +388,18 @@ small, small a, small a:hover{
 }
 
 .feed-header h2{
-	float:left;
-	margin-top:14px;
 	font-size:18px;
 	letter-spacing:1px;
 	text-transform:uppercase;
+}
+
+.feed-header-title{
+	float:left;
+}
+
+.feed-header-title h2{
+	margin-top:4px;
+	margin-bottom:2px;
 }
 
 .feed-header a.btn{
