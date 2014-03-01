@@ -30,7 +30,7 @@ class CountryHandler(BaseHandler):
 			values["feed"] = zip(ideas, authors)
 			
 			if offset:
-				values["more_ideas_url"] = "/?offset="+str(offset)
+				values["more_ideas_url"] = "/c/" + country.lower() + "?offset="+str(offset)
 
 			path = "country.html"
 
