@@ -327,6 +327,14 @@ small, small a, small a:hover{
 	margin-bottom:20px;
 }
 
+#email-settings{
+	margin-top:40px;
+}
+
+#settings .btn{
+	margin-top:20px;
+}
+
 /*--- 2 COLUMNS TEMPLATE ---*/
 
 .left{

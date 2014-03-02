@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import re
 
 from google.appengine.ext import db
 
@@ -21,6 +22,20 @@ class User(db.Expando):
 	created = db.DateTimeProperty(auto_now_add=True)
 	updated = db.DateTimeProperty(auto_now=True)
 	
+	@staticmethod
+	def validate_email(email):
+		validated = False
+		if re.match("[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}", email):
+			validated = True
+		return validated
+
+	@staticmethod
+	def validate_country(country):
+		validated = False
+		if User.get_country_name(country):
+			validated = True
+		return validated		
+
 	@staticmethod
 	def get_countries():
 		countries = [
@@ -288,6 +303,7 @@ class User(db.Expando):
 				break
 
 		return name
+
 
 
 

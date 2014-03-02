@@ -19,7 +19,6 @@ class IdeasHandler(BaseHandler):
 		if selector == "all":
 			ideas, new_offset = Idea.get_last_ideas(offset=offset)
 		else:
-
 			country_name = User.get_country_name(selector)
 
 			if country_name:

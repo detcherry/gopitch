@@ -4,7 +4,20 @@
 <div id="settings">
 	<h2>Settings</h2>
 	<form role="form" method="post" action="/user/settings">
-		<h3>Email me when...</h3>
+		<h3 id="user-settings">User info</h3>
+		<div class="form-group">
+			<label for="email">Email: </label>
+			<input type="text" name="email" class="form-control" value="{{current_user.email}}"/>
+		</div>
+		<div class="form-group">
+			<label for="country">Country: </label>
+			<select name="country" class="form-control">
+				{% for country in countries %}
+				<option value="{{ country.code }}" {% if country.selected %}selected{% endif %}>{{ country.name }}</option>
+				{% endfor %}
+			</select>
+		</div>		
+		<h3 id="email-settings">Email me when...</h3>
 		<div class="form-group">
 			<label for="idea-comment">
 				<input type="checkbox" {% if current_user.email_idea_comment %}checked="checked"{% endif %} name="idea-comment">Someone comments on my ideas
@@ -20,6 +33,7 @@
 				<input type="checkbox" {% if current_user.email_comment_reply %}checked="checked"{% endif %} name="comment-reply">Someone replies to my comments
 			</label>
 		</div>
+
 		<div class="form-group">
 			<input type="submit" value="Update" class="btn btn-primary">
 		</div>

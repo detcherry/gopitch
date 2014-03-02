@@ -126,17 +126,8 @@ class AuthCompleteHandler(BaseHandler):
 		user_email = self.request.get("email")
 		user_country = self.request.get("country")
 		
-		user_email_ok = False
-		user_country_ok = False
-		
-		if re.match("[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+\.[a-zA-Z]{2,4}", user_email):
-			user_email_ok = True
-			
-		countries = User.get_countries()
-		for country in countries:
-			if user_country == country["code"]:
-				user_country_ok = True
-				break
+		user_email_ok = User.validate_email(user_email)
+		user_country_ok = User.validate_country(user_country)
 			
 		if user_email_ok and user_country_ok:			
 			user = self.current_user
