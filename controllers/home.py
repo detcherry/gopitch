@@ -9,7 +9,7 @@ class HomeHandler(BaseHandler):
 		values = {}
 
 		if self.current_user and self.current_user.country:
-			country_url = "/c/"+self.current_user.country.lower()
+			country_url = "/ideas/"+self.current_user.country.lower()
 			self.redirect(country_url)
 		else:
 			path = "welcome.html"

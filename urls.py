@@ -1,8 +1,7 @@
 import webapp2
 
 from controllers.home import HomeHandler
-from controllers.country import CountryHandler
-from controllers.all import AllHandler
+from controllers.ideas import IdeasHandler
 from controllers.auth import AuthSigninHandler
 from controllers.auth import AuthCallbackHandler
 from controllers.auth import AuthSignoutHandler
@@ -49,8 +48,7 @@ app = webapp2.WSGIApplication(
 		("/admin/update", AdminUpdateHandler),
 		("/queue/update", QueueUpdateHandler),
 		("/queue/event", QueueEventHandler),
-		("/ideas/all", AllHandler),
-		("/c/(\w+)", CountryHandler),
+		("/ideas/(\w+)", IdeasHandler),
 		("/", HomeHandler),
 	],
 	config = config,
