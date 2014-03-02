@@ -1,8 +1,5 @@
 import logging
 
-from datetime import datetime
-from calendar import timegm
-
 from error import GetpitchdError
 
 from google.appengine.ext import db
@@ -20,6 +17,8 @@ class CountryHandler(BaseHandler):
 
 		if country_name:
 			values["country_name"] = country_name.lower().capitalize()
+			values["country_code"] = country.lower()
+
 			ideas, offset = Idea.get_last_ideas(country=country,offset=self.request.get("offset"))
 
 			author_keys = []
@@ -32,7 +31,7 @@ class CountryHandler(BaseHandler):
 			if offset:
 				values["more_ideas_url"] = "/c/" + country.lower() + "?offset="+str(offset)
 
-			path = "country.html"
+			path = "ideas.html"
 
 			self.render(path, values)
 		else:

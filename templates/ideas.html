@@ -24,7 +24,13 @@
 	<div class="feed-header">
 		<div class="feed-header-title">
 			<h2>Recent ideas</h2>
-			<small>({{country_name}})</small>
+			<small>
+				{% if country_name %}
+					<a href="/c/{{country_code}}">{{country_name}}</a> | <a href="/ideas/all">All countries</a>
+				{% else %}
+					All countries
+				{% endif %}
+			</small>
 		</div>
 		<a class="btn btn-default" href="/idea/pitch">Pitch a new idea</a>
 	</div>
