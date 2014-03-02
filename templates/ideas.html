@@ -26,9 +26,9 @@
 			<h2>Recent ideas</h2>
 			<small>
 				{% if country_name %}
-					<a href="/c/{{country_code}}">{{country_name}}</a> | <a href="/ideas/all">All countries</a>
+					<a href="/c/{{country_code}}" class="active">{{country_name}}</a> | <a href="/ideas/all">All countries</a>
 				{% else %}
-					All countries
+					<a href="/ideas/all">All countries</a>
 				{% endif %}
 			</small>
 		</div>

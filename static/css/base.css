@@ -402,6 +402,10 @@ small, small a, small a:hover{
 	margin-bottom:2px;
 }
 
+.feed-header-title a.active{
+	text-decoration:underline;
+}
+
 .feed-header a.btn{
 	float:right;
 }
