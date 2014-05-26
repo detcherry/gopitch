@@ -40,7 +40,7 @@ class Idea(db.Model):
 			},{
 				"slug": "acquisition",
 				"title": "Acquisition",
-				"question": "How will you to attract potential users/customers?",
+				"question": "How will you attract potential users/customers?",
 			},{
 				"slug": "business_model",
 				"title": "Business Model",
