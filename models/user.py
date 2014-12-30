@@ -6,6 +6,8 @@ import re
 
 from google.appengine.ext import db
 
+from controllers import config
+
 class User(db.Expando):
 	twitter_id = db.StringProperty(required=True)
 	twitter_access_token_key = db.StringProperty(required=True)
@@ -13,6 +15,7 @@ class User(db.Expando):
 	username = db.StringProperty(required=True)
 	name = db.StringProperty(required=True)
 	bio = db.TextProperty(required=False)
+	avatar = db.StringProperty(required=False)
 	ideas = db.IntegerProperty(required=True, default=0)
 	email = db.StringProperty(required=False)
 	country = db.StringProperty(required=False)
@@ -21,7 +24,7 @@ class User(db.Expando):
 	email_comment_reply = db.BooleanProperty(required=True, default=True)
 	created = db.DateTimeProperty(auto_now_add=True)
 	updated = db.DateTimeProperty(auto_now=True)
-	
+
 	@staticmethod
 	def validate_email(email):
 		validated = False

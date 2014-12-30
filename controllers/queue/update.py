@@ -22,7 +22,7 @@ class QueueUpdateHandler(BaseHandler):
 	def post(self):
 		cursor = self.request.get("cursor")
 		
-		q = Idea.all()
+		q = User.all()
 		q.order("created")
 		
 		# Is there a cursor?
@@ -32,6 +32,34 @@ class QueueUpdateHandler(BaseHandler):
 		else:
 			logging.info("No cursor")
 
+		batch_size = 5
+		users = q.fetch(batch_size)
+		new_users = []
+
+		for user in users:
+			logging.info("Copying @%s avatar" % (user.username))
+			original_filename = "/gs" +config.FOLDER + "/" + str(user.twitter_id)
+
+			image_manager = images.Image(filename=original_filename)
+			image_manager.rotate(360)
+			png = image_manager.execute_transforms()
+			logging.info("Encoded into .PNG")
+
+			destination_filename = config.NEW_FOLDER + "/" + str(user.twitter_id)
+			gcs_file = gcs.open(destination_filename,'w',content_type="image/png",options={"x-goog-acl":"public-read"})
+			gcs_file.write(png)
+			gcs_file.close()
+			logging.info("Saved into the new bucket")
+
+			# Save blobstore URL in user
+			blob_filename = "/gs" + destination_filename
+			blobkey = blobstore.create_gs_key(blob_filename)
+			user.avatar = images.get_serving_url(blobkey)
+			new_users.append(user)
+			logging.info("Blobstore URL updated in user info")		
+
+		db.put(new_users)
+		logging.info("Users saved")
 
 		"""
 		batch_size = 5
@@ -60,6 +88,8 @@ class QueueUpdateHandler(BaseHandler):
 
 		db.put(new_ideas)
 
+		#########
+
 		for user in users:
 			try:
 				del user.image
@@ -86,7 +116,7 @@ class QueueUpdateHandler(BaseHandler):
 			gcs_file.close()
 		"""
 
-		if(len(ideas)==batch_size):
+		if(len(users)==batch_size):
 			new_cursor = q.cursor()
 			task = Task(
 				url = "/queue/update",

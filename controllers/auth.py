@@ -57,15 +57,27 @@ class AuthCallbackHandler(BaseHandler):
 					temp_user = api.verify_credentials()
 					temp_image = urlfetch.Fetch(str(temp_user.profile_image_url).replace("_normal", "")).content
 
-					# Save or update image in Cloud storage file
+					# Transform image into .PNG
+					image_manager = images.Image(image_data=temp_image)
+					image_manager.rotate(360)
+					temp_png = image_manager.execute_transforms()
+					logging.info("Encoded into .PNG")
+
+					# Save or update image in Cloud storage
 					filename = config.FOLDER + "/" + str(temp_user.id)
-					gcs_file = gcs.open(filename,'w',content_type="image",options={"x-goog-acl":"public-read"})
-					gcs_file.write(temp_image)
+					gcs_file = gcs.open(filename,'w',content_type="image/png",options={"x-goog-acl":"public-read"})
+					gcs_file.write(temp_png)
 					gcs_file.close()
+					logging.info("Image saved to Google Cloud Storage")
+
+					# Get avatar
+					blob_filename = "/gs" + filename
+					blobkey = blobstore.create_gs_key(blob_filename)
+					temp_avatar = str(images.get_serving_url(blobkey))
 								
 					if not user:
 						logging.info("User did not exist")
-	
+
 						user = User(
 							twitter_id = str(temp_user.id),
 							twitter_access_token_key = str(access_token.key),
@@ -73,7 +85,9 @@ class AuthCallbackHandler(BaseHandler):
 							username = str(temp_user.screen_name).lower(),
 							name = temp_user.name,
 							bio = temp_user.description,
+							avatar = temp_avatar,
 						)
+						
 					else:
 						logging.info("User had to be updated")
 
@@ -83,7 +97,8 @@ class AuthCallbackHandler(BaseHandler):
 						user.username = str(temp_user.screen_name).lower()
 						user.name = temp_user.name
 						user.bio = temp_user.description
-					
+						user.avatar = temp_avatar
+											
 					user.put()
 					logging.info("User @%s saved in datastore"%(user.username))
 				
