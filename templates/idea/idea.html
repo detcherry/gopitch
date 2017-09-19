@@ -67,7 +67,7 @@
 	{% if comments %}
 		{% for a, c, d in comments %}
 		<div class="comment" style="padding-left:{{ d|double }}em">
-			<small><a href="/{{ a.username }}" class="author-pic" style="background-image:url('{{ author.avatar }}')"></a> <a href="/{{ a.username }}">@{{ a.username }}</a> | {{ c.created|timesince|upto:',' }} ago</small>
+			<small><a href="/{{ a.username }}" class="author-pic" style="background-image:url('{{ a.avatar }}')"></a> <a href="/{{ a.username }}">@{{ a.username }}</a> | {{ c.created|timesince|upto:',' }} ago</small>
 			<div class="comment-text">
 			{{ c.text|linebreaksbr }}
 			</div>
